@@ -1,4 +1,5 @@
 import { Zap, Code2, Workflow, Settings2, ArrowRight } from "lucide-react";
+import { motion } from "framer-motion";
 
 const Services = () => {
   const services = [
@@ -36,23 +37,45 @@ const Services = () => {
     <section id="services" className="py-24 bg-background">
       <div className="container mx-auto px-6">
         <div className="text-center max-w-3xl mx-auto mb-16">
-          <p className="text-secondary font-medium tracking-wide uppercase text-sm mb-4">
+          <motion.p
+            className="text-secondary font-medium tracking-wide uppercase text-sm mb-4"
+            initial={{ opacity: 0, y: 16 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.3 }}
+            transition={{ duration: 0.6, ease: [0.25, 0.1, 0.25, 1] }}
+          >
             What We Do
-          </p>
-          <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-6">
+          </motion.p>
+          <motion.h2
+            className="text-3xl md:text-4xl font-bold text-foreground mb-6"
+            initial={{ opacity: 0, y: 16 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.3 }}
+            transition={{ duration: 0.7, delay: 0.05, ease: [0.25, 0.1, 0.25, 1] }}
+          >
             Solutions that create <span className="text-secondary">real impact</span>
-          </h2>
-          <p className="text-muted-foreground leading-relaxed">
+          </motion.h2>
+          <motion.p
+            className="text-muted-foreground leading-relaxed"
+            initial={{ opacity: 0, y: 16 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.3 }}
+            transition={{ duration: 0.7, delay: 0.1, ease: [0.25, 0.1, 0.25, 1] }}
+          >
             We partner with businesses to design and build custom software solutions 
             tailored to their unique needs.
-          </p>
+          </motion.p>
         </div>
 
         <div className="grid md:grid-cols-2 gap-8">
           {services.map((service, index) => (
-            <div
+            <motion.div
               key={service.title}
               className="group p-8 bg-card border border-border hover:border-primary/50 transition-all duration-300 hover:shadow-lg"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.25 }}
+              transition={{ duration: 0.65, delay: index * 0.08, ease: [0.25, 0.1, 0.25, 1] }}
             >
               <div className="flex items-start gap-6">
                 <div className="w-14 h-14 bg-primary flex items-center justify-center flex-shrink-0">
@@ -84,7 +107,7 @@ const Services = () => {
                   </a>
                 </div>
               </div>
-            </div>
+            </motion.div>
           ))}
         </div>
       </div>

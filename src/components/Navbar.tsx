@@ -1,9 +1,11 @@
 import { useState } from "react";
 import { Menu, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import BookingModal from "@/components/BookingModal";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const [isBookingModalOpen, setIsBookingModalOpen] = useState(false);
 
   const navLinks = [
     { name: "About", href: "#about" },
@@ -13,7 +15,8 @@ const Navbar = () => {
   ];
 
   return (
-    <nav className="fixed top-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-md border-b border-border">
+    <>
+      <nav className="fixed top-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-md border-b border-border">
       <div className="container mx-auto px-6 py-4">
         <div className="flex items-center justify-between">
           <a href="#" className="text-2xl font-bold text-foreground tracking-tight">
@@ -31,7 +34,10 @@ const Navbar = () => {
                 {link.name}
               </a>
             ))}
-            <Button className="bg-primary text-primary-foreground hover:bg-primary/90">
+            <Button 
+              className="bg-primary text-primary-foreground hover:bg-primary/90"
+              onClick={() => setIsBookingModalOpen(true)}
+            >
               Let's Talk
             </Button>
           </div>
@@ -58,13 +64,22 @@ const Navbar = () => {
                 {link.name}
               </a>
             ))}
-            <Button className="bg-primary text-primary-foreground hover:bg-primary/90 w-fit">
+            <Button 
+              className="bg-primary text-primary-foreground hover:bg-primary/90 w-fit"
+              onClick={() => setIsBookingModalOpen(true)}
+            >
               Let's Talk
             </Button>
           </div>
         )}
       </div>
     </nav>
+
+    <BookingModal
+      isOpen={isBookingModalOpen}
+      onClose={() => setIsBookingModalOpen(false)}
+    />
+    </>
   );
 };
 

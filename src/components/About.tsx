@@ -1,4 +1,5 @@
 import { TrendingUp, Users, Target, Handshake } from "lucide-react";
+import { motion } from "framer-motion";
 
 const About = () => {
   const features = [
@@ -29,32 +30,60 @@ const About = () => {
       <div className="container mx-auto px-6">
         <div className="grid lg:grid-cols-2 gap-16 items-center">
           <div className="space-y-6">
-            <p className="text-secondary font-medium tracking-wide uppercase text-sm">
+            <motion.p
+              className="text-secondary font-medium tracking-wide uppercase text-sm"
+              initial={{ opacity: 0, y: 16 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.3 }}
+              transition={{ duration: 0.6, ease: [0.25, 0.1, 0.25, 1] }}
+            >
               About Us
-            </p>
-            <h2 className="text-3xl md:text-4xl font-bold text-card-foreground leading-tight">
+            </motion.p>
+            <motion.h2
+              className="text-3xl md:text-4xl font-bold text-card-foreground leading-tight"
+              initial={{ opacity: 0, y: 16 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.3 }}
+              transition={{ duration: 0.7, delay: 0.05, ease: [0.25, 0.1, 0.25, 1] }}
+            >
               We're a digital agency passionate about{" "}
               <span className="text-secondary">turning ideas into impact</span>
-            </h2>
-            <p className="text-muted-foreground leading-relaxed">
+            </motion.h2>
+            <motion.p
+              className="text-muted-foreground leading-relaxed"
+              initial={{ opacity: 0, y: 16 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.3 }}
+              transition={{ duration: 0.7, delay: 0.1, ease: [0.25, 0.1, 0.25, 1] }}
+            >
               As the demand for digitalization continues to rise, businesses need more 
               than just software — they need solutions that solve real problems. LagonEX 
               exists to be that helping hand, guiding companies through automation, 
               workflow optimization, and technology-driven innovation.
-            </p>
-            <p className="text-muted-foreground leading-relaxed">
+            </motion.p>
+            <motion.p
+              className="text-muted-foreground leading-relaxed"
+              initial={{ opacity: 0, y: 16 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.3 }}
+              transition={{ duration: 0.7, delay: 0.15, ease: [0.25, 0.1, 0.25, 1] }}
+            >
               We partner with businesses to design and build custom software solutions 
               tailored to their unique needs. Whether you're streamlining internal 
               operations or enhancing customer-facing experiences, we deliver solutions 
               that create real impact.
-            </p>
+            </motion.p>
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-            {features.map((feature) => (
-              <div
+            {features.map((feature, index) => (
+              <motion.div
                 key={feature.title}
                 className="p-6 bg-background border border-border hover:border-primary/50 transition-colors duration-300"
+                initial={{ opacity: 0, y: 18 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, amount: 0.25 }}
+                transition={{ duration: 0.6, delay: 0.05 + index * 0.07, ease: [0.25, 0.1, 0.25, 1] }}
               >
                 <div className="w-12 h-12 bg-primary/10 flex items-center justify-center mb-4">
                   <feature.icon className="h-6 w-6 text-primary" />
@@ -65,7 +94,7 @@ const About = () => {
                 <p className="text-muted-foreground text-sm leading-relaxed">
                   {feature.description}
                 </p>
-              </div>
+              </motion.div>
             ))}
           </div>
         </div>
