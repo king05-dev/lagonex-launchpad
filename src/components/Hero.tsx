@@ -1,94 +1,126 @@
-import { ArrowRight, Zap, Workflow, Code, Settings } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import heroImage from "@/assets/hero-image.jpg";
 
 const Hero = () => {
   const services = [
-    { icon: Zap, label: "Business Automation" },
-    { icon: Code, label: "Custom Software" },
-    { icon: Workflow, label: "System Integration" },
-    { icon: Settings, label: "Digital Optimization" },
+    "Business Automation",
+    "Custom Software",
+    "System Integration",
+    "Digital Optimization",
+    "SaaS Solutions",
+    "AI Integration",
+  ];
+
+  const clients = [
+    "TechCorp",
+    "InnovateCo",
+    "DataFlow",
+    "CloudSync",
+    "SmartBiz",
   ];
 
   return (
-    <section className="relative min-h-screen flex items-center overflow-hidden pt-20">
-      {/* Background Image with Overlay */}
-      <div className="absolute inset-0">
-        <img
-          src={heroImage}
-          alt="Digital transformation visualization"
-          className="w-full h-full object-cover"
-        />
-        <div className="absolute inset-0 bg-gradient-to-r from-primary/95 via-primary/85 to-primary/70" />
-      </div>
-
-      <div className="container mx-auto px-6 relative z-10">
-        <div className="grid lg:grid-cols-2 gap-12 items-center">
-          <div className="space-y-8">
-            <p className="text-accent/80 font-medium tracking-wide uppercase text-sm">
+    <section className="relative min-h-screen pt-24 pb-16 overflow-hidden bg-background">
+      <div className="container mx-auto px-6">
+        {/* Top Section */}
+        <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-start mb-8">
+          {/* Left Content */}
+          <div className="space-y-6">
+            <p className="text-muted-foreground text-sm tracking-wide flex items-center gap-2">
+              <span className="text-accent">✦</span>
               We build intelligent software solutions
             </p>
             
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-primary-foreground leading-tight">
+            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-foreground leading-tight">
               Empowering Businesses Through{" "}
-              <span className="text-accent">Intelligent Software</span>
+              <span className="text-accent italic">Intelligent</span>
+              <br />
+              Software Solutions
             </h1>
+          </div>
 
-            <p className="text-lg text-primary-foreground/80 max-w-xl leading-relaxed">
-              LagonEX is a digital agency built to help businesses stand out in an 
-              increasingly competitive and digital-first world. We create powerful, 
-              scalable, and purpose-driven software solutions.
+          {/* Right Description */}
+          <div className="lg:pt-12">
+            <p className="text-muted-foreground leading-relaxed">
+              From <span className="text-foreground font-medium">automation</span> to{" "}
+              <span className="text-foreground font-medium">custom development</span> and{" "}
+              <span className="text-foreground font-medium">optimization</span> — we help businesses grow in the{" "}
+              <span className="text-foreground font-medium italic">digital era</span>.
             </p>
+          </div>
+        </div>
 
-            <div className="flex flex-wrap gap-4">
-              <Button 
-                size="lg" 
-                className="bg-accent text-accent-foreground hover:bg-accent/90 group"
-              >
-                View Projects
-                <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
-              </Button>
-              <Button 
-                size="lg" 
-                variant="outline" 
-                className="border-primary-foreground/30 text-primary-foreground hover:bg-primary-foreground/10"
-              >
-                Learn More
-              </Button>
-            </div>
+        {/* Hero Image with Overlay */}
+        <div className="relative rounded-2xl overflow-hidden">
+          <img
+            src={heroImage}
+            alt="Digital transformation visualization"
+            className="w-full h-[400px] md:h-[500px] object-cover"
+          />
+          
+          {/* Dark Overlay */}
+          <div className="absolute inset-0 bg-gradient-to-r from-primary/80 via-primary/50 to-transparent" />
 
-            {/* Service Pills */}
-            <div className="flex flex-wrap gap-3 pt-4">
+          {/* Left Service Tags */}
+          <div className="absolute left-6 top-6 space-y-3">
+            <p className="text-primary-foreground/70 text-xs uppercase tracking-wide">
+              Powered by
+            </p>
+            <p className="text-primary-foreground font-medium text-sm">
+              LagonEX Solutions
+            </p>
+            <div className="space-y-2 pt-2">
               {services.map((service) => (
                 <div
-                  key={service.label}
-                  className="flex items-center gap-2 px-4 py-2 bg-primary-foreground/10 border border-primary-foreground/20 text-primary-foreground text-sm"
+                  key={service}
+                  className="flex items-center gap-2 text-primary-foreground/90 text-sm"
                 >
-                  <service.icon size={16} />
-                  <span>{service.label}</span>
+                  <span className="text-accent">✦</span>
+                  <span>{service}</span>
                 </div>
               ))}
             </div>
           </div>
 
-          <div className="hidden lg:block">
-            {/* Stats Section */}
-            <div className="grid grid-cols-2 gap-6">
-              {[
-                { value: "100+", label: "Projects Delivered" },
-                { value: "50+", label: "Happy Clients" },
-                { value: "10+", label: "Years Experience" },
-                { value: "24/7", label: "Support Available" },
-              ].map((stat) => (
+          {/* Center CTA Button */}
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
+            <Button 
+              size="lg" 
+              className="bg-background/10 backdrop-blur-sm border border-primary-foreground/20 text-primary-foreground hover:bg-background/20 rounded-full px-6 group"
+            >
+              <ArrowRight className="mr-2 h-4 w-4" />
+              View Projects
+            </Button>
+          </div>
+
+          {/* Right Social Links */}
+          <div className="absolute right-6 bottom-6 flex items-center gap-3">
+            <span className="text-primary-foreground/70 text-sm">Follow Us</span>
+            <div className="flex gap-2">
+              {["X", "in", "fb", "ig"].map((social) => (
                 <div
-                  key={stat.label}
-                  className="p-6 bg-primary-foreground/5 border border-primary-foreground/10 backdrop-blur-sm"
+                  key={social}
+                  className="w-8 h-8 rounded-full bg-primary-foreground/10 backdrop-blur-sm border border-primary-foreground/20 flex items-center justify-center text-primary-foreground text-xs hover:bg-primary-foreground/20 transition-colors cursor-pointer"
                 >
-                  <p className="text-4xl font-bold text-accent mb-2">{stat.value}</p>
-                  <p className="text-primary-foreground/70 text-sm">{stat.label}</p>
+                  {social}
                 </div>
               ))}
             </div>
+          </div>
+        </div>
+
+        {/* Client Logos Bar */}
+        <div className="mt-12 pt-8 border-t border-border">
+          <div className="flex flex-wrap items-center justify-center gap-8 md:gap-16">
+            {clients.map((client) => (
+              <span
+                key={client}
+                className="text-muted-foreground/60 font-medium text-lg tracking-wide hover:text-muted-foreground transition-colors"
+              >
+                {client}
+              </span>
+            ))}
           </div>
         </div>
       </div>
