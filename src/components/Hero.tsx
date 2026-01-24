@@ -1,20 +1,9 @@
 import { useState, useEffect, useMemo, type SVGProps } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import MobileServiceWheel from "@/components/MobileServiceWheel";
-import heroImage from "@/assets/hero-image.jpg";
-import ctaImage from "@/assets/cta-image.jpg";
 
-// Service hero images array - can be expanded with more images
-const serviceImages = [
-  "/hero-images/business_automation_hero_1.webp", // Business Automation
-  '/hero-images/custom_software.webp', // Custom Software (fallback to default)
-  '/hero-images/system-integration.jpg', // System Integration
-  '/hero-images/digital_optimization.webp',// Digital Optimization (fallback to default)
-  ctaImage, // SaaS Solutions
-  heroImage, // AI Integration (fallback to default)
-];
 
 const IconX = (props: SVGProps<SVGSVGElement>) => (
   <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" {...props}>
@@ -58,20 +47,12 @@ const Hero = () => {
   const slides = useMemo(
     () =>
       services.map((service, index) => {
-        const isCtaImage = index % 2 === 1;
-        const overlayFrom = isCtaImage
-          ? "rgba(34,114,145,0.70)"
-          : "rgba(34,173,208,0.70)";
-        const overlayVia = isCtaImage
-          ? "rgba(34,114,145,0.30)"
-          : "rgba(34,173,208,0.30)";
-        const pattern = `radial-gradient(700px circle at ${15 + index * 10}% ${20 + index * 7}%, rgba(121,146,107,0.28), transparent 60%), radial-gradient(600px circle at ${85 - index * 7}% ${75 - index * 6}%, rgba(34,173,208,0.25), transparent 55%), linear-gradient(120deg, ${overlayFrom} 0%, ${overlayVia} 45%, rgba(0,0,0,0) 100%)`;
+        const accentA = index % 2 === 0 ? "hsl(var(--primary))" : "hsl(var(--accent))";
+        const accentB = index % 2 === 0 ? "hsl(var(--accent))" : "hsl(var(--primary))";
         return {
           service,
-          image: serviceImages[index] || (isCtaImage ? ctaImage : heroImage),
-          overlayFrom,
-          overlayVia,
-          pattern,
+          accentA,
+          accentB,
         };
       }),
     [services]
@@ -257,161 +238,117 @@ const Hero = () => {
         </div>
 
         {/* Hero Image with Overlay */}
-        <motion.div 
-          className="relative rounded-2xl overflow-hidden border border-border shadow-2xl hidden md:block"
+        <motion.div
+          className="hidden md:block"
           variants={imageVariants}
           onHoverStart={() => setIsPaused(true)}
           onHoverEnd={() => setIsPaused(false)}
         >
-          <AnimatePresence mode="wait">
-            <motion.img
-              key={`${featuredIndex}-${featured.image}`}
-              src={featured.image}
-              alt="Digital transformation visualization"
-              className="w-full h-[420px] md:h-[480px] object-cover"
-              initial={{ opacity: 0.25, scale: 1.02 }}
-              animate={{ opacity: 1, scale: 1 }}
-              exit={{ opacity: 0.15, scale: 0.995 }}
-              transition={{ duration: 0.8, ease: [0.25, 0.1, 0.25, 1] }}
-            />
-          </AnimatePresence>
-          
-          {/* Dark Overlay */}
-          <motion.div
-            className="absolute inset-0"
-            animate={{ backgroundImage: featured.pattern }}
-            transition={{ duration: 0.8, ease: [0.25, 0.1, 0.25, 1] }}
-            style={{ backgroundSize: "cover", backgroundPosition: "center" }}
-          />
-          <div className="absolute inset-0 bg-gradient-to-t from-background/40 via-transparent to-transparent" />
+          <div className="grid lg:grid-cols-3 gap-6 items-stretch">
+            <div className="lg:col-span-2 p-8 bg-card border border-border rounded-2xl shadow-xl relative overflow-hidden">
+              <div
+                className="absolute inset-0 opacity-20"
+                style={{
+                  backgroundImage: `radial-gradient(600px circle at 20% 20%, ${featured.accentA}, transparent 55%), radial-gradient(700px circle at 80% 70%, ${featured.accentB}, transparent 55%)`,
+                }}
+              />
 
-          <div className="absolute -left-24 -top-24 h-[420px] w-[420px] rounded-full bg-primary/25 blur-3xl" />
-          <div className="absolute -bottom-28 -right-28 h-[520px] w-[520px] rounded-full bg-accent/20 blur-3xl" />
+              <div className="relative flex items-start justify-between gap-6">
+                <div className="space-y-3">
+                  <p className="text-secondary font-medium tracking-wide uppercase text-sm">
+                    Tools I Use
+                  </p>
+                  <h3 className="text-3xl font-bold text-foreground leading-tight">
+                    {featured.service}
+                  </h3>
+                  <p className="text-muted-foreground leading-relaxed max-w-xl">
+                    {featured.service === "Shopify" &&
+                      "Custom themes, Liquid development, and store optimizations."}
+                    {featured.service === "React" &&
+                      "Component-driven UIs with modern tooling and best practices."}
+                    {featured.service === "Laravel/PHP" &&
+                      "REST APIs, business logic, and full-stack web applications."}
+                    {featured.service === "Next.js" &&
+                      "Production-ready apps with routing, SSR/SSG, and performance."}
+                    {featured.service === "WordPress" &&
+                      "Custom plugins, speed/SEO improvements, and site maintenance."}
+                    {featured.service === "Supabase" &&
+                      "Auth, Postgres, and realtime features for modern apps."}
+                  </p>
+                </div>
 
-          {/* Left Service Tags */}
-          <motion.div 
-            className="absolute left-6 top-6 w-[280px] md:w-[320px] rounded-2xl bg-black/30 backdrop-blur-md border border-white/20 p-5 shadow-xl"
-            initial={{ opacity: 0, x: -20 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.8, delay: 0.6 }}
-          >
-            <div className="flex items-center justify-between">
-              <p className="text-white/80 text-xs uppercase tracking-widest">
-                Stack
-              </p>
-              <span className="inline-flex items-center rounded-full bg-white/10 px-2.5 py-1 text-[10px] font-semibold text-white/90">
-                Jerquin
-              </span>
-            </div>
-            <p className="text-white font-bold text-xl md:text-2xl tracking-wide">
-              Tools I Use
-            </p>
-            <p className="text-white/80 text-xs mt-1">
-              Featured: <span className="text-white font-semibold">{featured.service}</span>
-            </p>
-            <div className="mt-3 grid grid-cols-1 gap-2">
-              <motion.div
-                className="grid grid-cols-1 gap-2"
-                onHoverStart={() => setIsPaused(true)}
-                onHoverEnd={() => setIsPaused(false)}
-              >
+                <div className="flex flex-col items-end gap-3">
+                  <Button
+                    size="lg"
+                    className="bg-primary text-primary-foreground hover:bg-primary/90 group"
+                    asChild
+                  >
+                    <a href={getCTALink()}>
+                      <ArrowRight className="mr-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
+                      View Projects
+                    </a>
+                  </Button>
+
+                  <div className="flex gap-2">
+                    {[
+                      {
+                        label: "LinkedIn",
+                        Icon: IconLinkedIn,
+                        href: "https://www.linkedin.com/in/jerquin-bayudo-834970203",
+                      },
+                      {
+                        label: "Facebook",
+                        Icon: IconFacebook,
+                        href: "https://www.facebook.com/profile.php?id=100019476193809",
+                      },
+                    ].map(({ label, Icon, href }) => (
+                      <a
+                        key={label}
+                        href={href}
+                        aria-label={label}
+                        className="w-11 h-11 rounded-full bg-muted/40 border border-border flex items-center justify-center text-foreground hover:bg-muted transition-colors"
+                      >
+                        <Icon className="h-5 w-5" />
+                      </a>
+                    ))}
+                  </div>
+                </div>
+              </div>
+
+              <div className="relative mt-6 flex flex-wrap gap-2">
                 {services.map((service, index) => (
-                  <motion.button
+                  <button
                     key={service}
                     onClick={() => handleServiceClick(index)}
-                    className={`flex items-center gap-3 rounded-xl px-3 py-2 text-white text-sm md:text-base font-semibold transition-colors cursor-pointer text-left ${
+                    className={`px-3 py-1.5 rounded-full text-sm font-semibold transition-colors border ${
                       index === featuredIndex
-                        ? "bg-white/20 ring-1 ring-white/40"
-                        : "bg-white/10 hover:bg-white/15"
+                        ? "bg-primary text-primary-foreground border-primary"
+                        : "bg-background text-foreground border-border hover:bg-muted"
                     }`}
-                    whileHover={{ scale: 1.02, x: 2 }}
-                    whileTap={{ scale: 0.98 }}
                   >
-                    <span className="text-accent">✦</span>
-                    <span>{service}</span>
-                  </motion.button>
+                    {service}
+                  </button>
                 ))}
-              </motion.div>
+              </div>
             </div>
-          </motion.div>
 
-          {/* Center CTA Button */}
-          <motion.div 
-            className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"
-            initial={{ opacity: 0, scale: 0.8 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.8, delay: 0.8 }}
-            onHoverStart={() => setIsPaused(true)}
-            onHoverEnd={() => setIsPaused(false)}
-          >
-            <motion.div
-              className="relative"
-              animate={{ y: [0, -4, 0] }}
-              transition={{ duration: 2.2, repeat: Infinity, ease: "easeInOut" }}
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.98 }}
-            >
-              <motion.div
-                className="absolute -inset-2 rounded-full bg-primary/25 blur-xl"
-                animate={{ opacity: [0.35, 0.7, 0.35] }}
-                transition={{ duration: 2.2, repeat: Infinity, ease: "easeInOut" }}
-              />
-              <Button 
-                size="lg" 
-                className="relative bg-black/20 backdrop-blur-sm border border-white/30 text-white hover:bg-black/30 rounded-full px-8 py-6 group transition-all duration-300"
-                asChild
-              >
-                <a href={getCTALink()}>
-                  <ArrowRight className="mr-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
-                  View {featured.service} Projects
-                </a>
-              </Button>
-            </motion.div>
-           </motion.div>
-
-          {/* Right Social Links */}
-          <motion.div 
-            className="absolute right-6 bottom-6 rounded-2xl bg-black/30 backdrop-blur-md border border-white/20 px-4 py-3 shadow-xl flex items-center gap-3"
-            initial={{ opacity: 0, x: 20 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.8, delay: 1 }}
-          >
-            <span className="text-white/90 text-xs uppercase tracking-widest">Follow</span>
-            <div className="flex gap-2">
-              {[
-                {
-                  label: "LinkedIn",
-                  Icon: IconLinkedIn,
-                  href: "https://www.linkedin.com/in/jerquin-bayudo-834970203",
-                },
-                {
-                  label: "Facebook",
-                  Icon: IconFacebook,
-                  href: "https://www.facebook.com/profile.php?id=100019476193809",
-                },
-                { label: "X", Icon: IconX, href: "#" },
-                { label: "Instagram", Icon: IconInstagram, href: "#" },
-              ].map(({ label, Icon, href }, index) => (
-                <motion.a
-                  key={label}
-                  href={href}
-                  aria-label={label}
-                  className="w-11 h-11 rounded-full bg-black/20 backdrop-blur-sm border border-white/30 flex items-center justify-center text-white hover:bg-black/30 hover:scale-110 transition-all duration-300"
-                  initial={{ opacity: 0, scale: 0 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  transition={{
-                    duration: 0.5,
-                    delay: 1.2 + index * 0.1,
-                    ease: [0.25, 0.1, 0.25, 1],
-                  }}
-                  whileHover={{ scale: 1.2, rotate: 5 }}
-                  whileTap={{ scale: 0.95 }}
-                >
-                  <Icon className="h-5 w-5" />
-                </motion.a>
-              ))}
+            <div className="p-8 bg-background border border-border rounded-2xl shadow-xl">
+              <p className="text-secondary font-medium tracking-wide uppercase text-sm">
+                More Tools
+              </p>
+              <div className="mt-4 grid grid-cols-1 gap-3">
+                {["Figma", "Tailwind", "Docker", "Git"].map((item) => (
+                  <div
+                    key={item}
+                    className="flex items-center justify-between p-4 bg-card border border-border rounded-xl"
+                  >
+                    <span className="font-semibold text-foreground">{item}</span>
+                    <span className="text-xs text-muted-foreground">daily</span>
+                  </div>
+                ))}
+              </div>
             </div>
-          </motion.div>
+          </div>
         </motion.div>
 
         {/* Mobile Service Wheel - Only visible on mobile */}

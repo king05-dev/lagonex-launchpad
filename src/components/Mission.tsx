@@ -60,7 +60,7 @@ const Mission = () => {
       title: "AYTS Marketplace",
       description:
         "Marketplace app built with Next.js and Supabase.",
-      stack: "Next.js, Supabase",
+      stack: "Next.js, Supabase, Postgres",
       href: "https://ayts.jerquinbayudo.workers.dev/",
       meta: "Personal Project — Jan 2026 - Present",
     },
@@ -121,9 +121,24 @@ const Mission = () => {
                   <p className="text-muted-foreground leading-relaxed mt-2">
                     {project.description}
                   </p>
-                  <p className="text-muted-foreground text-sm mt-4">
-                    {project.stack}
-                  </p>
+                  <div className="mt-4">
+                    <p className="text-xs font-semibold tracking-wide uppercase text-muted-foreground">
+                      Tech Stack
+                    </p>
+                    <div className="mt-2 flex flex-wrap gap-2">
+                      {project.stack.split(",").map((t) => {
+                        const tag = t.trim();
+                        return (
+                          <span
+                            key={tag}
+                            className="px-3 py-1 bg-primary/10 text-primary text-xs font-semibold rounded-full"
+                          >
+                            {tag}
+                          </span>
+                        );
+                      })}
+                    </div>
+                  </div>
                 </div>
                 <ExternalLink className="h-5 w-5 text-muted-foreground group-hover:text-primary transition-colors flex-shrink-0" />
               </div>
@@ -157,9 +172,24 @@ const Mission = () => {
                     <p className="text-muted-foreground leading-relaxed mt-2">
                       {project.description}
                     </p>
-                    <p className="text-muted-foreground text-sm mt-4">
-                      {project.stack}
-                    </p>
+                    <div className="mt-4">
+                      <p className="text-xs font-semibold tracking-wide uppercase text-muted-foreground">
+                        Tech Stack
+                      </p>
+                      <div className="mt-2 flex flex-wrap gap-2">
+                        {project.stack.split(",").map((t) => {
+                          const tag = t.trim();
+                          return (
+                            <span
+                              key={tag}
+                              className="px-3 py-1 bg-primary/10 text-primary text-xs font-semibold rounded-full"
+                            >
+                              {tag}
+                            </span>
+                          );
+                        })}
+                      </div>
+                    </div>
                   </div>
                   <ExternalLink className="h-5 w-5 text-muted-foreground group-hover:text-primary transition-colors flex-shrink-0" />
                 </div>
