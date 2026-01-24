@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, Mail, Phone, MapPin } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import ctaImage from "@/assets/cta-image.jpg";
 import BookingModal from "@/components/BookingModal";
@@ -42,8 +42,8 @@ const CTA = () => {
               viewport={{ once: true, amount: 0.25 }}
               transition={{ duration: 0.7, delay: 0.05, ease: [0.25, 0.1, 0.25, 1] }}
             >
-              Let's Build Solutions That{" "}
-              <span className="text-secondary">Move Your Business Forward</span>
+              Want to work together?{" "}
+              <span className="text-secondary">Let's talk.</span>
             </motion.h2>
             <motion.p
               className="text-muted-foreground leading-relaxed text-lg"
@@ -52,8 +52,7 @@ const CTA = () => {
               viewport={{ once: true, amount: 0.25 }}
               transition={{ duration: 0.7, delay: 0.1, ease: [0.25, 0.1, 0.25, 1] }}
             >
-              Whether you're starting your digital journey or upgrading existing systems, 
-              LagonEX is ready to help you transform ideas into impactful software solutions.
+              I’m available for Shopify builds, custom web apps, and long-term maintenance.
             </motion.p>
             <motion.div
               className="space-y-4"
@@ -62,9 +61,20 @@ const CTA = () => {
               viewport={{ once: true, amount: 0.25 }}
               transition={{ duration: 0.7, delay: 0.15, ease: [0.25, 0.1, 0.25, 1] }}
             >
-              <p className="text-foreground font-semibold">Let's build smarter.</p>
-              <p className="text-foreground font-semibold">Let's build scalable.</p>
-              <p className="text-foreground font-semibold">Let's build with LagonEX.</p>
+              <div className="space-y-3 text-muted-foreground">
+                <div className="flex items-center gap-3">
+                  <Mail className="h-4 w-4" />
+                  <span>jerquinbayudo@gmail.com</span>
+                </div>
+                <div className="flex items-center gap-3">
+                  <Phone className="h-4 w-4" />
+                  <span>(+63)961-989-6211</span>
+                </div>
+                <div className="flex items-start gap-3">
+                  <MapPin className="h-4 w-4 mt-1" />
+                  <span>Cagayan de Oro, Philippines</span>
+                </div>
+              </div>
             </motion.div>
             <motion.div
               className="flex flex-wrap gap-4 pt-4"
@@ -76,9 +86,12 @@ const CTA = () => {
               <Button 
                 size="lg" 
                 className="bg-primary text-primary-foreground hover:bg-primary/90 group"
+                asChild
               >
-                Get Started
-                <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
+                <a href="mailto:jerquinbayudo@gmail.com">
+                  Email Me
+                  <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
+                </a>
               </Button>
               <Button 
                 size="lg" 

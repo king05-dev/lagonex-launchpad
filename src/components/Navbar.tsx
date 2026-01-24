@@ -8,9 +8,10 @@ const Navbar = () => {
   const [isBookingModalOpen, setIsBookingModalOpen] = useState(false);
 
   const navLinks = [
-    { name: "About", href: "#about" },
-    { name: "Services", href: "#services" },
-    { name: "Why Us", href: "#why" },
+    { name: "Info", href: "#info" },
+    { name: "Experience", href: "#experience" },
+    { name: "Projects", href: "#projects" },
+    { name: "Personal", href: "#personal-projects" },
     { name: "Contact", href: "#contact" },
   ];
 
@@ -20,7 +21,7 @@ const Navbar = () => {
       <div className="container mx-auto px-6 py-4">
         <div className="flex items-center justify-between">
           <a href="#" className="text-2xl font-bold text-foreground tracking-tight">
-            LagonEX
+            Jerquin Bayudo
           </a>
 
           {/* Desktop Navigation */}
@@ -38,7 +39,7 @@ const Navbar = () => {
               className="bg-primary text-primary-foreground hover:bg-primary/90"
               onClick={() => setIsBookingModalOpen(true)}
             >
-              Let's Talk
+              Schedule a Call
             </Button>
           </div>
 
@@ -68,7 +69,7 @@ const Navbar = () => {
               className="bg-primary text-primary-foreground hover:bg-primary/90 w-fit"
               onClick={() => setIsBookingModalOpen(true)}
             >
-              Let's Talk
+              Schedule a Call
             </Button>
           </div>
         )}

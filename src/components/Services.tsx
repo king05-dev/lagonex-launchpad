@@ -1,40 +1,36 @@
-import { Zap, Code2, Workflow, Settings2, ArrowRight } from "lucide-react";
+import { Briefcase, Building2, Headset, PhoneCall } from "lucide-react";
 import { motion } from "framer-motion";
 
 const Services = () => {
   const services = [
     {
-      icon: Zap,
-      title: "Business Process Automation",
-      description:
-        "Reduce manual work and eliminate inefficiencies through smart automation. We help businesses automate repetitive tasks, data flows, and operational processes to save time and reduce errors.",
-      features: ["Task Automation", "Data Flow Optimization", "Error Reduction"],
+      icon: Briefcase,
+      title: "Freelance Web Developer",
+      description: "Upwork, OnlineJobs — Oct 2025 - present (Cagayan de Oro)",
+      features: ["Shopify", "React", "Laravel", "Custom websites"],
     },
     {
-      icon: Code2,
-      title: "Custom Software Development",
-      description:
-        "From internal tools to customer platforms, we build reliable and scalable software that aligns with your business goals. Every solution is crafted to support growth and adaptability.",
-      features: ["Internal Tools", "Customer Platforms", "Scalable Architecture"],
+      icon: Building2,
+      title: "Tech Lead / Software Engineer",
+      description: "Fligno Software Inc. — Oct 2021 - Oct 2025 (Cagayan de Oro)",
+      features: ["React", "Laravel", "MySQL", "MongoDB", "Shopify/WordPress"],
     },
     {
-      icon: Workflow,
-      title: "Workflow & System Integration",
-      description:
-        "We design seamless workflows that connect your tools, systems, and teams — enabling smoother operations and better decision-making across your organization.",
-      features: ["System Connectivity", "Team Collaboration", "Process Streamlining"],
+      icon: Headset,
+      title: "Technical Support",
+      description: "T-Mobile — Nov 2019 - June 2021 (Cagayan de Oro)",
+      features: ["Technical support", "Customer satisfaction", "Connectivity troubleshooting"],
     },
     {
-      icon: Settings2,
-      title: "Digital Enhancement & Optimization",
-      description:
-        "We enhance existing systems to improve performance, usability, and scalability, ensuring your software evolves alongside your business.",
-      features: ["Performance Tuning", "UX Improvements", "Scalability Solutions"],
+      icon: PhoneCall,
+      title: "Billing/Sales Representative",
+      description: "AT&T — June 2017 - August 2019 (Davao, PH)",
+      features: ["Billing support", "Sales support", "Order processing"],
     },
   ];
 
   return (
-    <section id="services" className="py-24 bg-background">
+    <section id="experience" className="py-24 bg-background">
       <div className="container mx-auto px-6">
         <div className="text-center max-w-3xl mx-auto mb-16">
           <motion.p
@@ -44,7 +40,7 @@ const Services = () => {
             viewport={{ once: true, amount: 0.3 }}
             transition={{ duration: 0.6, ease: [0.25, 0.1, 0.25, 1] }}
           >
-            What We Do
+            Experience
           </motion.p>
           <motion.h2
             className="text-3xl md:text-4xl font-bold text-foreground mb-6"
@@ -53,7 +49,7 @@ const Services = () => {
             viewport={{ once: true, amount: 0.3 }}
             transition={{ duration: 0.7, delay: 0.05, ease: [0.25, 0.1, 0.25, 1] }}
           >
-            Solutions that create <span className="text-secondary">real impact</span>
+            Roles that shipped <span className="text-secondary">real products</span>
           </motion.h2>
           <motion.p
             className="text-muted-foreground leading-relaxed"
@@ -62,8 +58,7 @@ const Services = () => {
             viewport={{ once: true, amount: 0.3 }}
             transition={{ duration: 0.7, delay: 0.1, ease: [0.25, 0.1, 0.25, 1] }}
           >
-            We partner with businesses to design and build custom software solutions 
-            tailored to their unique needs.
+            A mix of freelance, tech leadership, software engineering, and customer-facing roles.
           </motion.p>
         </div>
 
@@ -98,13 +93,6 @@ const Services = () => {
                       </span>
                     ))}
                   </div>
-                  <a
-                    href="#contact"
-                    className="inline-flex items-center text-secondary font-medium hover:text-primary transition-colors group/link"
-                  >
-                    Learn more
-                    <ArrowRight className="ml-2 h-4 w-4 group-hover/link:translate-x-1 transition-transform" />
-                  </a>
                 </div>
               </div>
             </motion.div>

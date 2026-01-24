@@ -1,7 +1,8 @@
-import { useState, useEffect, useMemo } from "react";
+import { useState, useEffect, useMemo, type SVGProps } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import MobileServiceWheel from "@/components/MobileServiceWheel";
 import heroImage from "@/assets/hero-image.jpg";
 import ctaImage from "@/assets/cta-image.jpg";
 
@@ -40,14 +41,16 @@ const IconInstagram = (props: SVGProps<SVGSVGElement>) => (
 );
 
 const Hero = () => {
+  const easing: [number, number, number, number] = [0.25, 0.1, 0.25, 1];
+
   const services = useMemo(
     () => [
-      "Business Automation",
-      "Custom Software",
-      "System Integration",
-      "Digital Optimization",
-      "SaaS Solutions",
-      "AI Integration",
+      "Shopify",
+      "React",
+      "Laravel/PHP",
+      "Next.js",
+      "WordPress",
+      "Supabase",
     ],
     []
   );
@@ -91,19 +94,12 @@ const Hero = () => {
   };
 
   const getCTALink = () => {
-    const slug = featured.service.toLowerCase().replace(/\s+/g, "-");
-    return `/services/${slug}`;
+    return "#projects";
   };
 
   const featured = slides[featuredIndex];
 
-  const clients = [
-    "TechCorp",
-    "InnovateCo",
-    "DataFlow",
-    "CloudSync",
-    "SmartBiz",
-  ];
+  const clients = ["Shopify", "React", "Laravel", "WordPress", "Next.js"];
 
   // Animation variants
   const containerVariants = {
@@ -124,7 +120,7 @@ const Hero = () => {
       y: 0,
       transition: {
         duration: 0.8,
-        ease: [0.25, 0.1, 0.25, 1],
+        ease: easing,
       },
     },
   };
@@ -141,7 +137,7 @@ const Hero = () => {
       backgroundPosition: "100% 50%",
       transition: {
         duration: 1.2,
-        ease: [0.25, 0.1, 0.25, 1],
+        ease: easing,
         backgroundPosition: {
           duration: 3,
           repeat: Infinity,
@@ -159,7 +155,7 @@ const Hero = () => {
       scale: 1,
       transition: {
         duration: 1,
-        ease: [0.25, 0.1, 0.25, 1],
+        ease: easing,
       },
     },
   };
@@ -181,11 +177,11 @@ const Hero = () => {
           >
             <p className="text-muted-foreground text-sm tracking-wide flex items-center gap-2">
               <span className="text-accent">✦</span>
-              We build intelligent software solutions
+              Full-Stack and Shopify Developer
             </p>
             
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-foreground leading-tight">
-              Empowering Businesses Through{" "}
+              Jerquin{" "}
               <motion.span 
                 className="relative inline-block"
                 variants={intelligentVariants}
@@ -197,7 +193,7 @@ const Hero = () => {
                     display: "inline-block",
                   }}
                 >
-                  Intelligent
+                  Bayudo
                 </span>
                 <motion.span 
                   className="absolute -bottom-2 left-0 w-full h-1 bg-gradient-to-r from-accent via-primary to-accent rounded-full"
@@ -211,9 +207,15 @@ const Hero = () => {
                   style={{ transformOrigin: "left" }}
                 />
               </motion.span>
-              <br />
-              Software Solutions
             </h1>
+            <motion.p
+              className="text-muted-foreground italic mt-4"
+              initial={{ opacity: 0, y: 12 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.7, delay: 0.2, ease: [0.25, 0.1, 0.25, 1] }}
+            >
+              “Stay afraid but do it anyway.”
+            </motion.p>
           </motion.div>
 
           {/* Right Description */}
@@ -221,18 +223,42 @@ const Hero = () => {
             className="lg:pt-12"
             variants={itemVariants}
           >
-            <p className="text-muted-foreground leading-relaxed text-lg lg:text-xl">
-              From <span className="text-foreground font-medium">automation</span> to{" "}
-              <span className="text-foreground font-medium">custom development</span> and{" "}
-              <span className="text-foreground font-medium">optimization</span> — we help businesses grow in the{" "}
-              <span className="text-foreground font-medium italic">digital era</span>.
+            <p className="text-lg text-muted-foreground leading-relaxed max-w-lg">
+              I build custom, high-performing websites and web apps using Shopify, React, and Laravel. I’ve led teams, shipped production systems, and worked across eCommerce and custom software development.
             </p>
+            
+            <div className="flex flex-col sm:flex-row gap-4 pt-4">
+              <Button 
+                size="lg" 
+                className="bg-gradient-to-r from-primary to-accent hover:from-primary/90 hover:to-accent/90 text-white font-semibold rounded-xl px-8 py-6 shadow-lg hover:shadow-xl transition-all duration-300 group"
+                asChild
+              >
+                <a href="#projects">
+                  View Projects
+                  <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
+                </a>
+              </Button>
+              <Button 
+                size="lg" 
+                variant="outline"
+                className="border-2 border-border hover:border-accent hover:bg-accent/10 font-semibold rounded-xl px-8 py-6 transition-all duration-300"
+                asChild
+              >
+                <a
+                  href="https://drive.google.com/file/d/1Pd0jkWWhBZIVWdrd4fvexBuH8UVFcDc9/view?usp=drive_link"
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  View Resume
+                </a>
+              </Button>
+            </div>
           </motion.div>
         </div>
 
         {/* Hero Image with Overlay */}
         <motion.div 
-          className="relative rounded-2xl overflow-hidden border border-border shadow-2xl"
+          className="relative rounded-2xl overflow-hidden border border-border shadow-2xl hidden md:block"
           variants={imageVariants}
           onHoverStart={() => setIsPaused(true)}
           onHoverEnd={() => setIsPaused(false)}
@@ -271,14 +297,14 @@ const Hero = () => {
           >
             <div className="flex items-center justify-between">
               <p className="text-white/80 text-xs uppercase tracking-widest">
-                Services
+                Stack
               </p>
               <span className="inline-flex items-center rounded-full bg-white/10 px-2.5 py-1 text-[10px] font-semibold text-white/90">
-                LagonEX
+                Jerquin
               </span>
             </div>
             <p className="text-white font-bold text-xl md:text-2xl tracking-wide">
-              LagonEX Solutions
+              Tools I Use
             </p>
             <p className="text-white/80 text-xs mt-1">
               Featured: <span className="text-white font-semibold">{featured.service}</span>
@@ -353,22 +379,30 @@ const Hero = () => {
             <span className="text-white/90 text-xs uppercase tracking-widest">Follow</span>
             <div className="flex gap-2">
               {[
-                { label: "X", Icon: IconX },
-                { label: "LinkedIn", Icon: IconLinkedIn },
-                { label: "Facebook", Icon: IconFacebook },
-                { label: "Instagram", Icon: IconInstagram },
-              ].map(({ label, Icon }, index) => (
+                {
+                  label: "LinkedIn",
+                  Icon: IconLinkedIn,
+                  href: "https://www.linkedin.com/in/jerquin-bayudo-834970203",
+                },
+                {
+                  label: "Facebook",
+                  Icon: IconFacebook,
+                  href: "https://www.facebook.com/profile.php?id=100019476193809",
+                },
+                { label: "X", Icon: IconX, href: "#" },
+                { label: "Instagram", Icon: IconInstagram, href: "#" },
+              ].map(({ label, Icon, href }, index) => (
                 <motion.a
                   key={label}
-                  href="#"
+                  href={href}
                   aria-label={label}
                   className="w-11 h-11 rounded-full bg-black/20 backdrop-blur-sm border border-white/30 flex items-center justify-center text-white hover:bg-black/30 hover:scale-110 transition-all duration-300"
                   initial={{ opacity: 0, scale: 0 }}
                   animate={{ opacity: 1, scale: 1 }}
-                  transition={{ 
-                    duration: 0.5, 
+                  transition={{
+                    duration: 0.5,
                     delay: 1.2 + index * 0.1,
-                    ease: [0.25, 0.1, 0.25, 1]
+                    ease: [0.25, 0.1, 0.25, 1],
                   }}
                   whileHover={{ scale: 1.2, rotate: 5 }}
                   whileTap={{ scale: 0.95 }}
@@ -379,6 +413,9 @@ const Hero = () => {
             </div>
           </motion.div>
         </motion.div>
+
+        {/* Mobile Service Wheel - Only visible on mobile */}
+        <MobileServiceWheel />
 
         {/* Client Logos Bar */}
         <motion.div 

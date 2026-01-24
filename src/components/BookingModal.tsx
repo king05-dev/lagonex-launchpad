@@ -40,7 +40,7 @@ const BookingModal = ({ isOpen, onClose }: BookingModalProps) => {
                 </div>
                 <div>
                   <h3 className="text-lg font-semibold text-foreground">Schedule a Call</h3>
-                  <p className="text-sm text-muted-foreground">Book a consultation with our team</p>
+                  <p className="text-sm text-muted-foreground">Book a consultation with me</p>
                 </div>
               </div>
               <Button
@@ -58,7 +58,7 @@ const BookingModal = ({ isOpen, onClose }: BookingModalProps) => {
               <iframe
                 src={calendarUrl}
                 className="w-full h-full rounded-lg border-0 bg-white"
-                title="Schedule a call with LagonEX"
+                title="Schedule a call"
                 sandbox="allow-scripts allow-same-origin allow-forms allow-popups"
                 style={{ minHeight: '600px' }}
               />
