@@ -13,8 +13,10 @@ if (typeof window !== "undefined") {
   })();
 
   const isRootLikePath = decodedPathname.replace(/[\s\u00A0]+/g, "") === "/";
-  if (isRootLikePath && (decodedPathname !== "/" || href.endsWith("/"))) {
-    window.history.replaceState(null, "", `${origin}${search}${hash}`);
+ if ((isRootLikePath && href.endsWith("/")) || decodedPathname !== "/") {
+    if (isRootLikePath) {
+      window.history.replaceState(null, "", `${origin}${search}${hash}`);
+    }
   }
 }
 
