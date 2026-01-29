@@ -226,7 +226,7 @@ const Hero = () => {
                 asChild
               >
                 <a
-                  href="https://drive.google.com/file/d/1Pd0jkWWhBZIVWdrd4fvexBuH8UVFcDc9/view?usp=drive_link"
+                  href="https://drive.google.com/file/d/1OJc-ghmS3aDPDDXJE8iplgXxjFvFmpXP/view?usp=sharing"
                   target="_blank"
                   rel="noreferrer"
                 >
