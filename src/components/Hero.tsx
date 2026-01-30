@@ -205,7 +205,7 @@ const Hero = () => {
             variants={itemVariants}
           >
             <p className="text-lg text-muted-foreground leading-relaxed max-w-lg">
-              I build custom, high-performing websites and web apps using Shopify, React, and Laravel. I’ve led teams, shipped production systems, and worked across eCommerce and custom software development.
+              I build custom, high-performing websites and web apps using Shopify, WordPress, Javascript, and Laravel. I’ve led teams, shipped production systems, and worked across eCommerce and custom software development.
             </p>
             
             <div className="flex flex-col sm:flex-row gap-4 pt-4">
