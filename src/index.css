@@ -1,161 +1,119 @@
-@import url("https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&display=swap");
-@import url("https://fonts.googleapis.com/css2?family=Crimson+Pro:wght@400;500;600;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Crimson+Pro:ital,wght@0,400;0,600;1,400;1,600&display=swap");
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-/* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
-All colors MUST be HSL.
-*/
-
 @layer base {
   :root {
-    --background: 213 24% 15%; /* #142335 */
-    --foreground: 210 40% 98%;
+    /* Light mode — LagonEX brand */
+    --background: 210 30% 97%;        /* #F4F7FA */
+    --foreground: 210 60% 10%;        /* #0A1A26 */
 
-    --card: 213 25% 20%; /* #18354D */
-    --card-foreground: 210 40% 98%;
+    --card: 0 0% 100%;                /* #FFFFFF */
+    --card-foreground: 210 60% 10%;
 
-    --popover: 213 25% 20%;
-    --popover-foreground: 210 40% 98%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 210 60% 10%;
 
-    --primary: 189 77% 48%; /* #22ADD0 */
-    --primary-foreground: 213 24% 15%;
+    --primary: 189 74% 38%;           /* #1699B5 — LagonEX cyan */
+    --primary-foreground: 0 0% 100%;
 
-    --secondary: 193 54% 39%; /* #227291 */
-    --secondary-foreground: 210 40% 98%;
+    --secondary: 196 63% 28%;         /* #1A5E78 — LagonEX teal */
+    --secondary-foreground: 0 0% 100%;
 
-    --muted: 213 25% 25%;
-    --muted-foreground: 210 40% 70%;
+    --muted: 210 25% 92%;             /* #E4EDF4 */
+    --muted-foreground: 205 18% 45%;  /* #617B8A */
 
-    --accent: 122 19% 46%; /* #79926B */
-    --accent-foreground: 210 40% 98%;
+    --accent: 110 17% 36%;            /* #557149 — LagonEX green */
+    --accent-foreground: 0 0% 100%;
 
     --destructive: 0 72% 50%;
     --destructive-foreground: 0 85% 97%;
 
-    --border: 191 35% 30%; /* #224D63 */
-    --input: 191 35% 30%;
-    --ring: 189 77% 48%;
+    --border: 210 22% 87%;            /* #D2DCE6 */
+    --input: 210 22% 87%;
+    --ring: 189 74% 38%;
 
     --radius: 0rem;
 
-    --sidebar-background: 0 0% 98%;
-
-    --sidebar-foreground: 210 40% 98%;
-
-    --sidebar-primary: 189 77% 48%; /* #22ADD0 */
-
-    --sidebar-primary-foreground: 213 24% 15%;
-
-    --sidebar-accent: 122 19% 46%; /* #79926B */
-
-    --sidebar-accent-foreground: 210 40% 98%;
-
-    --sidebar-border: 191 35% 30%; /* #224D63 */
-
-    --sidebar-ring: 189 77% 48%;
-
-    --chart-1: 189 77% 48%; /* #22ADD0 */
-
-    --chart-2: 193 54% 39%; /* #227291 */
-
-    --chart-3: 122 19% 46%; /* #79926B */
-
-    --chart-4: 213 25% 25%;
-
-    --chart-5: 213 25% 20%; /* #18354D */
-
-    --sidebar: 213 25% 20%; /* #18354D */
-
-    --font-sans: 'DM Sans', ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans', sans-serif;
-
+    --font-sans: 'DM Sans', ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
     --font-serif: 'Crimson Pro', ui-serif, Georgia, Cambria, 'Times New Roman', Times, serif;
-
     --font-mono: 'SF Mono', ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace;
 
-    --shadow-2xs: 0 1px 3px 0px hsl(0 0% 0% / 0.05);
-
-    --shadow-xs: 0 1px 3px 0px hsl(0 0% 0% / 0.05);
-
-    --shadow-sm: 0 1px 3px 0px hsl(0 0% 0% / 0.1), 0 1px 2px -1px hsl(0 0% 0% / 0.1);
-
-    --shadow: 0 1px 3px 0px hsl(0 0% 0% / 0.1), 0 1px 2px -1px hsl(0 0% 0% / 0.1);
-
-    --shadow-md: 0 1px 3px 0px hsl(0 0% 0% / 0.1), 0 2px 4px -1px hsl(0 0% 0% / 0.1);
-
-    --shadow-lg: 0 1px 3px 0px hsl(0 0% 0% / 0.1), 0 4px 6px -1px hsl(0 0% 0% / 0.1);
-
-    --shadow-xl: 0 1px 3px 0px hsl(0 0% 0% / 0.1), 0 8px 10px -1px hsl(0 0% 0% / 0.1);
-
-    --shadow-2xl: 0 1px 3px 0px hsl(0 0% 0% / 0.25);
+    --shadow-2xs: 0 1px 2px 0px hsl(210 30% 50% / 0.05);
+    --shadow-xs:  0 1px 3px 0px hsl(210 30% 50% / 0.08);
+    --shadow-sm:  0 1px 4px 0px hsl(210 30% 50% / 0.10), 0 1px 2px -1px hsl(210 30% 50% / 0.06);
+    --shadow:     0 2px 8px 0px hsl(210 30% 50% / 0.10), 0 1px 3px -1px hsl(210 30% 50% / 0.06);
+    --shadow-md:  0 4px 16px 0px hsl(210 30% 50% / 0.10), 0 2px 4px -1px hsl(210 30% 50% / 0.06);
+    --shadow-lg:  0 8px 24px 0px hsl(210 30% 50% / 0.10), 0 4px 8px -1px hsl(210 30% 50% / 0.06);
+    --shadow-xl:  0 16px 40px 0px hsl(210 30% 50% / 0.12), 0 8px 16px -1px hsl(210 30% 50% / 0.08);
+    --shadow-2xl: 0 24px 64px 0px hsl(210 30% 50% / 0.18);
 
     --tracking-normal: 0em;
-
     --spacing: 0.25rem;
+
+    --sidebar-background: 0 0% 100%;
+    --sidebar-foreground: 210 60% 10%;
+    --sidebar-primary: 189 74% 38%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 110 17% 36%;
+    --sidebar-accent-foreground: 0 0% 100%;
+    --sidebar-border: 210 22% 87%;
+    --sidebar-ring: 189 74% 38%;
+    --sidebar: 0 0% 100%;
+
+    --chart-1: 189 74% 38%;
+    --chart-2: 196 63% 28%;
+    --chart-3: 110 17% 36%;
+    --chart-4: 210 25% 70%;
+    --chart-5: 210 25% 85%;
   }
 
   .dark {
-    --background: 213 24% 15%; /* #142335 */
+    --background: 213 24% 15%;
     --foreground: 210 40% 98%;
-
-    --card: 213 25% 20%; /* #18354D */
+    --card: 213 25% 20%;
     --card-foreground: 210 40% 98%;
-
     --popover: 213 25% 20%;
     --popover-foreground: 210 40% 98%;
-
-    --primary: 189 77% 48%; /* #22ADD0 */
+    --primary: 189 77% 48%;
     --primary-foreground: 213 24% 15%;
-
-    --secondary: 193 54% 39%; /* #227291 */
+    --secondary: 193 54% 39%;
     --secondary-foreground: 210 40% 98%;
-
     --muted: 213 25% 25%;
     --muted-foreground: 210 40% 70%;
-
-    --accent: 122 19% 46%; /* #79926B */
+    --accent: 122 19% 46%;
     --accent-foreground: 210 40% 98%;
-
     --destructive: 0 84% 60%;
     --destructive-foreground: 0 85% 97%;
-
-    --border: 191 35% 30%; /* #224D63 */
+    --border: 191 35% 30%;
     --input: 191 35% 30%;
     --ring: 189 77% 48%;
-    --sidebar-background: 0 0% 98%;
+    --sidebar-background: 213 25% 20%;
     --sidebar-foreground: 210 40% 98%;
-    --sidebar-primary: 189 77% 48%; /* #22ADD0 */
+    --sidebar-primary: 189 77% 48%;
     --sidebar-primary-foreground: 213 24% 15%;
-    --sidebar-accent: 122 19% 46%; /* #79926B */
+    --sidebar-accent: 122 19% 46%;
     --sidebar-accent-foreground: 210 40% 98%;
-    --sidebar-border: 191 35% 30%; /* #224D63 */
+    --sidebar-border: 191 35% 30%;
     --sidebar-ring: 189 77% 48%;
-    --chart-1: 189 77% 48%; /* #22ADD0 */
-    --chart-2: 193 54% 39%; /* #227291 */
-    --chart-3: 122 19% 46%; /* #79926B */
-    --chart-4: 213 25% 25%;
-    --chart-5: 213 25% 20%; /* #18354D */
-    --sidebar: 213 25% 20%; /* #18354D */
+    --sidebar: 213 25% 20%;
     --shadow-2xs: 0 1px 3px 0px hsl(0 0% 0% / 0.05);
-    --shadow-xs: 0 1px 3px 0px hsl(0 0% 0% / 0.05);
-    --shadow-sm: 0 1px 3px 0px hsl(0 0% 0% / 0.1), 0 1px 2px -1px hsl(0 0% 0% / 0.1);
-    --shadow: 0 1px 3px 0px hsl(0 0% 0% / 0.1), 0 1px 2px -1px hsl(0 0% 0% / 0.1);
-    --shadow-md: 0 1px 3px 0px hsl(0 0% 0% / 0.1), 0 2px 4px -1px hsl(0 0% 0% / 0.1);
-    --shadow-lg: 0 1px 3px 0px hsl(0 0% 0% / 0.1), 0 4px 6px -1px hsl(0 0% 0% / 0.1);
-    --shadow-xl: 0 1px 3px 0px hsl(0 0% 0% / 0.1), 0 8px 10px -1px hsl(0 0% 0% / 0.1);
+    --shadow-xs:  0 1px 3px 0px hsl(0 0% 0% / 0.05);
+    --shadow-sm:  0 1px 3px 0px hsl(0 0% 0% / 0.1), 0 1px 2px -1px hsl(0 0% 0% / 0.1);
+    --shadow:     0 1px 3px 0px hsl(0 0% 0% / 0.1), 0 1px 2px -1px hsl(0 0% 0% / 0.1);
+    --shadow-md:  0 1px 3px 0px hsl(0 0% 0% / 0.1), 0 2px 4px -1px hsl(0 0% 0% / 0.1);
+    --shadow-lg:  0 1px 3px 0px hsl(0 0% 0% / 0.1), 0 4px 6px -1px hsl(0 0% 0% / 0.1);
+    --shadow-xl:  0 1px 3px 0px hsl(0 0% 0% / 0.1), 0 8px 10px -1px hsl(0 0% 0% / 0.1);
     --shadow-2xl: 0 1px 3px 0px hsl(0 0% 0% / 0.25);
   }
 }
 
 @layer base {
-  * {
-    @apply border-border;
-  }
-
-  body {
-    @apply bg-background text-foreground;
-  }
+  * { @apply border-border; }
+  body { @apply bg-background text-foreground; }
 }
 
 @layer utilities {
@@ -163,13 +121,24 @@ All colors MUST be HSL.
     animation: shimmer 3s ease-in-out infinite;
     background-position: 0% 50%;
   }
+
+  .animate-marquee {
+    animation: marquee 38s linear infinite;
+    display: flex;
+    width: max-content;
+  }
+
+  .animate-marquee-reverse {
+    animation: marquee 38s linear infinite reverse;
+  }
 }
 
 @keyframes shimmer {
-  0%, 100% {
-    background-position: 0% 50%;
-  }
-  50% {
-    background-position: 100% 50%;
-  }
+  0%, 100% { background-position: 0% 50%; }
+  50%       { background-position: 100% 50%; }
+}
+
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
 }
