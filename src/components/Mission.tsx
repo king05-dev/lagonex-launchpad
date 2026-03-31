@@ -22,7 +22,7 @@ const Mission = () => {
       description:
         "Boat service management platform for scheduling, maintenance tracking, and job assignments.",
       stack: "Vite, HonoJS, Supabase, Cloudflare, Postgres",
-      href: "https://marinehub-v.throbbing-fog-9a31.workers.dev/",
+      href: "https://marinehub-v.jerquin.workers.dev/",
     },
     {
       title: "SailOnyx Website",
