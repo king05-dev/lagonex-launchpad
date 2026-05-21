@@ -57,11 +57,11 @@ const Mission = () => {
       meta: "Personal Project",
     },
     {
-      title: "AYTS Marketplace",
+      title: "Kapaldo Marketplace",
       description:
         "Marketplace app built with Next.js and Supabase.",
       stack: "Next.js, Supabase, Postgres",
-      href: "https://ayts.jerquinbayudo.workers.dev/",
+      href: "https://kapaldo.com/",
       meta: "Personal Project — Jan 2026 - Present",
     },
   ];
