@@ -129,11 +129,13 @@ export const RESUME = {
     ],
     Development: [
       "React", "Next.js", "Laravel / PHP", "Shopify", "Liquid",
-      "HTML", "CSS", "jQuery", "JavaScript", "PWA / Offline Apps",
+      "HTML", "CSS", "JavaScript", "TypeScript", "Node.js / Bun",
+      "Hono.js", "Cron Jobs / Workers", "PWA / Offline Apps",
     ],
     Tools: [
-      "Figma", "Chakra UI", "Emotion", "Framer", "Tailwind", "Material UI",
-      "Git", "Databases", "Docker", "WordPress (Elementor / Beaver / WPBakery)",
+      "Figma", "Tailwind", "Git", "Docker", "Supabase",
+      "Cloudflare Workers", "Claude Code", "Cursor AI",
+      "WordPress (Elementor / Beaver / WPBakery)",
     ],
   },
 } as const;

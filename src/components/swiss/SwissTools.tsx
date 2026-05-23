@@ -3,7 +3,7 @@ import { motion } from "framer-motion";
 import { C, MONO, DISPLAY, DOT_BG } from "./tokens";
 import { Dot, Label, SectionHead, Tag } from "./primitives";
 
-const DAILY = ["Figma", "Tailwind", "Docker", "Git", "VSCode", "Linear", "Postman", "TablePlus"];
+const DAILY = ["Figma", "Tailwind", "Git", "VSCode", "Claude Code", "Cursor", "Postman", "TablePlus"];
 const ACCENT_CYCLE = [C.red, C.blue, C.yellow, C.ink];
 
 const SPRING = { type: "spring" as const, stiffness: 380, damping: 30 };
@@ -164,17 +164,46 @@ export function SwissTools() {
           </div>
         </motion.div>
 
+        {/* Row 1 right: React + Next.js, Cloudflare */}
         <ToolCard num="02" name="React + Next.js" desc="Component-driven UIs, modern tooling." accent={C.blue} className="lg:col-span-2" delay={0.14} />
-        <ToolCard num="03" name="Laravel / PHP" desc="APIs, dashboards, the boring-fast stuff." accent={C.yellow} className="lg:col-span-2" delay={0.22} />
-        <ToolCard num="04" name="WordPress" desc="Elementor · Beaver · WPBakery · custom plugins." accent={C.ink} className="lg:col-span-2" delay={0.18} />
-        <ToolCard num="05" name="Supabase" desc="Postgres + auth + realtime in a hurry." accent={C.blue} className="lg:col-span-2" delay={0.28} />
+        <ToolCard
+          num="03"
+          name="Cloudflare"
+          desc="Workers, Pages, R2, D1 — edge-first deployments that scale without the DevOps overhead."
+          accent={C.yellow}
+          className="lg:col-span-2"
+          delay={0.20}
+        >
+          <div style={{ marginTop: 10, display: "flex", gap: 6, flexWrap: "wrap" }}>
+            {["Workers", "Pages", "R2/D1", "Edge"].map((t) => <Tag key={t}>{t}</Tag>)}
+          </div>
+        </ToolCard>
+
+        {/* Row 2 right: Laravel, WordPress */}
+        <ToolCard num="04" name="Laravel / PHP" desc="APIs, dashboards, the boring-fast stuff." accent={C.red} className="lg:col-span-2" delay={0.18} />
+        <ToolCard num="05" name="WordPress" desc="Elementor · Beaver · WPBakery · custom plugins." accent={C.ink} className="lg:col-span-2" delay={0.26} />
+
+        {/* Row 3: AI Workflow + Supabase */}
+        <ToolCard
+          num="06"
+          name="AI Workflow"
+          desc="Agentic AI pipelines, Claude & GPT integrations, cron-triggered workers — the part of the stack most devs haven't shipped yet."
+          accent={C.blue}
+          className="lg:col-span-3"
+          delay={0.30}
+        >
+          <div style={{ marginTop: 10, display: "flex", gap: 6, flexWrap: "wrap" }}>
+            {["Claude", "Cursor", "Agentic AI", "Workers Cron"].map((t) => <Tag key={t}>{t}</Tag>)}
+          </div>
+        </ToolCard>
+        <ToolCard num="07" name="Supabase" desc="Postgres + auth + realtime. Database, storage, edge functions — the full backend in one." accent={C.green} className="lg:col-span-3" delay={0.36} />
 
         {/* Daily drivers — full row */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={VP}
-          transition={{ ...SPRING, delay: 0.34 }}
+          transition={{ ...SPRING, delay: 0.40 }}
           style={{
             gridColumn: "span 6",
             border: `1px solid ${C.ink}`,
@@ -211,7 +240,7 @@ export function SwissTools() {
                 initial={{ opacity: 0, y: 16 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={VP}
-                transition={{ ...SPRING, delay: 0.38 + i * 0.04 }}
+                transition={{ ...SPRING, delay: 0.44 + i * 0.04 }}
                 style={{
                   borderLeft: `1px solid ${C.ink}`,
                   padding: "14px 12px",
@@ -262,16 +291,18 @@ export function SwissTools() {
         <div className="grid grid-cols-2 gap-4">
           {[
             { num: "02", name: "React + Next.js", desc: "Component-driven UIs.", accent: C.blue },
-            { num: "03", name: "Laravel / PHP", desc: "APIs, dashboards.", accent: C.yellow },
-            { num: "04", name: "WordPress", desc: "Elementor · Beaver · WPBakery.", accent: C.ink },
-            { num: "05", name: "Supabase", desc: "Postgres + auth + realtime.", accent: C.blue },
+            { num: "03", name: "Cloudflare", desc: "Workers, Pages, R2 — edge-first.", accent: C.yellow },
+            { num: "04", name: "Laravel / PHP", desc: "APIs, dashboards.", accent: C.red },
+            { num: "05", name: "WordPress", desc: "Elementor · Beaver · WPBakery.", accent: C.ink },
+            { num: "06", name: "AI Workflow", desc: "Agentic AI, cron workers.", accent: C.blue },
+            { num: "07", name: "Supabase", desc: "Postgres + auth + realtime.", accent: C.green },
           ].map(({ num, name, desc, accent }, i) => (
             <motion.div
               key={num}
               initial={{ opacity: 0, y: 24 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={VP}
-              transition={{ ...SPRING, delay: 0.08 + i * 0.08 }}
+              transition={{ ...SPRING, delay: 0.08 + i * 0.06 }}
               style={{
                 backgroundColor: C.card,
                 border: `1px solid ${C.ink}`,
