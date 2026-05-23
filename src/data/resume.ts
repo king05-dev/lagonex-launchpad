@@ -14,7 +14,7 @@ export const RESUME = {
   },
   experience: [
     {
-      title: "Freelance Web Developer",
+      title: "Freelance Full-Stack Software Developer",
       org: "Upwork · OnlineJobs",
       period: "Oct 2025 — Present",
       place: "Cagayan de Oro",
