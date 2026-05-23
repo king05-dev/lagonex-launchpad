@@ -681,7 +681,7 @@ export function SwissHero() {
               </div>
             </FloodCard>
 
-            {/* Principle — slides from above */}
+            {/* Core stack — slides from above */}
             <FloodCard
               delay={T.princCard}
               fillColor={C.yellow}
@@ -690,13 +690,23 @@ export function SwissHero() {
               style={{ padding: "16px 20px" }}
             >
               <Label color={C.ink}>
-                <Dot color={C.ink} /> Principle
+                <Dot color={C.ink} /> Core stack
               </Label>
-              <div style={{ marginTop: 8, fontSize: "clamp(14px, 1.6vw, 18px)", fontWeight: 700, lineHeight: 1.18, color: C.ink, fontStyle: "italic", letterSpacing: "-0.005em" }}>
-                "Stay afraid, but do it anyway."
+              <div
+                style={{
+                  marginTop: 10,
+                  fontFamily: DISPLAY,
+                  fontSize: "clamp(14px, 1.6vw, 18px)",
+                  fontWeight: 800,
+                  letterSpacing: "-0.02em",
+                  lineHeight: 1.3,
+                  color: C.ink,
+                }}
+              >
+                Shopify · React<br />Laravel · WordPress
               </div>
-              <div style={{ marginTop: 6, fontFamily: MONO, fontSize: 11, color: C.ink2 }}>
-                — Carrie Fisher
+              <div style={{ marginTop: 8, fontFamily: MONO, fontSize: 11, color: C.ink2 }}>
+                50+ projects shipped
               </div>
             </FloodCard>
 
