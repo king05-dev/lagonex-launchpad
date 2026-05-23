@@ -1,73 +1,34 @@
-import Navbar from "@/components/Navbar";
-import Hero from "@/components/Hero";
-import About from "@/components/About";
-import Services from "@/components/Services";
-import Mission from "@/components/Mission";
-import CTA from "@/components/CTA";
-import Footer from "@/components/Footer";
-import Education from "@/components/Education";
-import Skills from "@/components/Skills";
- import { motion } from "framer-motion";
+import { SwissNavbar } from "@/components/swiss/SwissNavbar";
+import { SwissHero } from "@/components/swiss/SwissHero";
+import { SwissTools } from "@/components/swiss/SwissTools";
+import { SwissExperience } from "@/components/swiss/SwissExperience";
+import { SwissProjects } from "@/components/swiss/SwissProjects";
+import { SwissProcess } from "@/components/swiss/SwissProcess";
+import { SwissPersonal } from "@/components/swiss/SwissPersonal";
+import { SwissSkills } from "@/components/swiss/SwissSkills";
+import { SwissContact } from "@/components/swiss/SwissContact";
 
 const Index = () => {
   return (
-    <div className="min-h-screen">
-      <Navbar />
-      <Hero />
-      <motion.div
-        initial={{ opacity: 0, y: 24 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true, amount: 0.2 }}
-        transition={{ duration: 0.7, ease: [0.25, 0.1, 0.25, 1] }}
-      >
-        <About />
-      </motion.div>
-
-      <motion.div
-        initial={{ opacity: 0, y: 24 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true, amount: 0.2 }}
-        transition={{ duration: 0.7, ease: [0.25, 0.1, 0.25, 1] }}
-      >
-        <Services />
-      </motion.div>
-
-      <motion.div
-        initial={{ opacity: 0, y: 24 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true, amount: 0.2 }}
-        transition={{ duration: 0.7, ease: [0.25, 0.1, 0.25, 1] }}
-      >
-        <Mission />
-      </motion.div>
-
-      <motion.div
-        initial={{ opacity: 0, y: 24 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true, amount: 0.2 }}
-        transition={{ duration: 0.7, ease: [0.25, 0.1, 0.25, 1] }}
-      >
-        <Education />
-      </motion.div>
-
-      <motion.div
-        initial={{ opacity: 0, y: 24 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true, amount: 0.2 }}
-        transition={{ duration: 0.7, ease: [0.25, 0.1, 0.25, 1] }}
-      >
-        <Skills />
-      </motion.div>
-
-      <motion.div
-        initial={{ opacity: 0, y: 24 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true, amount: 0.2 }}
-        transition={{ duration: 0.7, ease: [0.25, 0.1, 0.25, 1] }}
-      >
-        <CTA />
-      </motion.div>
-      <Footer />
+    <div
+      style={{
+        backgroundColor: "#fafaf7",
+        color: "#0e0e0e",
+        fontFamily: '"Inter", system-ui, sans-serif',
+        minHeight: "100vh",
+      }}
+    >
+      <SwissNavbar />
+      <main>
+        <SwissHero />
+        <SwissTools />
+        <SwissExperience />
+        <SwissProjects />
+        <SwissProcess />
+        <SwissPersonal />
+        <SwissSkills />
+        <SwissContact />
+      </main>
     </div>
   );
 };
