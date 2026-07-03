@@ -7,6 +7,7 @@ import { SwissProcess } from "@/components/swiss/SwissProcess";
 import { SwissPersonal } from "@/components/swiss/SwissPersonal";
 import { SwissSkills } from "@/components/swiss/SwissSkills";
 import { SwissContact } from "@/components/swiss/SwissContact";
+import { SwissMessengerChat } from "@/components/swiss/SwissMessengerChat";
 
 const Index = () => {
   return (
@@ -29,6 +30,7 @@ const Index = () => {
         <SwissSkills />
         <SwissContact />
       </main>
+      <SwissMessengerChat />
     </div>
   );
 };
