@@ -34,11 +34,10 @@ const NAME = "Jerquin Bayudo";
 const CAPTION = "Full-stack & Shopify developer";
 
 const METRICS = [
-  { n: 8, suffix: "+", l: "Years building for the web", color: C.red },
-  { n: 50, suffix: "+", l: "Shipped projects across stacks", color: C.blue },
-  { n: 12, suffix: "", l: "Daily tools, fluently", color: C.ink },
-  { n: 4, suffix: "", l: "Years leading a tech team", color: C.yellow },
-  { n: 1, suffix: "", l: "Phone that answers, same day", color: C.ink },
+  { n: 4, suffix: "+", l: "Years building for the web", color: C.red },
+  { n: 30, suffix: "+", l: "Shipped projects across stacks", color: C.blue },
+  { n: 19, suffix: "", l: "Tools & platforms, fluently", color: C.ink },
+  { n: 24, suffix: "h", l: "Average response time", color: C.yellow },
 ];
 
 const PRINCIPLES = [
@@ -157,8 +156,9 @@ function AnimatedCornerMark() {
 
 function TypesetName() {
   return (
-    <div
+    <h1
       style={{
+        margin: 0,
         marginTop: 26,
         fontFamily: DISPLAY,
         fontSize: "clamp(44px, 8vw, 100px)",
@@ -199,7 +199,7 @@ function TypesetName() {
       >
         .
       </motion.span>
-    </div>
+    </h1>
   );
 }
 
@@ -534,9 +534,10 @@ export function SwissHero() {
             >
               I build custom, high-performing sites and web apps with{" "}
               <b style={{ backgroundColor: C.yellow, padding: "0 4px" }}>
-                Shopify, React, Laravel, and WordPress
+                Shopify, React, Laravel, and Supabase
               </b>
-              . Resourceful on the small jobs, committed to the long ones, persistent on the
+              {" "}— from freelance builds to leading delivery as Technical Lead at Fligno.
+              Resourceful on the small jobs, committed to the long ones, persistent on the
               bugs that fight back.
             </motion.div>
 
@@ -706,7 +707,7 @@ export function SwissHero() {
                 Shopify · React<br />Laravel · WordPress
               </div>
               <div style={{ marginTop: 8, fontFamily: MONO, fontSize: 11, color: C.ink2 }}>
-                50+ projects shipped
+                30+ projects shipped
               </div>
             </FloodCard>
 
@@ -715,7 +716,7 @@ export function SwissHero() {
 
         {/* ── Metrics strip ──────────────────────────────── */}
         <div
-          className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4"
+          className="grid grid-cols-2 lg:grid-cols-4 gap-4"
           style={{ marginTop: 16 }}
         >
           {METRICS.map((m, i) => (
