@@ -26,8 +26,6 @@ const T = {
   princCard: 2.9,
   metrics: 3.82,
   metricsStagger: 0.14,
-  tagline: 4.85,
-  taglineStagger: 0.22,
 };
 
 const NAME = "Jerquin Bayudo";
@@ -38,14 +36,6 @@ const METRICS = [
   { n: 30, suffix: "+", l: "Shipped projects across stacks", color: C.blue },
   { n: 19, suffix: "", l: "Tools & platforms, fluently", color: C.ink },
   { n: 24, suffix: "h", l: "Average response time", color: C.yellow },
-];
-
-const PRINCIPLES = [
-  { word: "resourceful", color: C.red },
-  { word: "committed", color: C.blue },
-  { word: "high quality", color: C.ink },
-  { word: "persevering", color: C.yellow },
-  { word: "useful on anything", color: C.green },
 ];
 
 // ─── sub-components ──────────────────────────────────────────────────────────
@@ -379,87 +369,6 @@ function AnimatedMetric({
   );
 }
 
-function PrinciplesTagline() {
-  return (
-    <motion.div
-      style={{
-        display: "flex",
-        flexWrap: "wrap",
-        alignItems: "center",
-        gap: "8px 20px",
-        marginTop: 14,
-        padding: "12px 0 4px",
-        borderTop: `1px solid ${C.rule}`,
-      }}
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      transition={{ delay: T.tagline, duration: 0.1 }}
-    >
-      {PRINCIPLES.map((p, i) => (
-        <motion.span
-          key={p.word}
-          style={{
-            display: "inline-flex",
-            alignItems: "center",
-            gap: 6,
-            fontFamily: MONO,
-            fontSize: 11,
-            letterSpacing: "0.1em",
-            textTransform: "uppercase",
-            color: C.ink2,
-          }}
-          initial={{ opacity: 0, x: -8 }}
-          animate={{ opacity: 1, x: 0 }}
-          transition={{
-            delay: T.tagline + i * T.taglineStagger,
-            duration: 0.18,
-            ease: [0.2, 0.8, 0.2, 1],
-          }}
-        >
-          <motion.span
-            initial={{ scale: 0 }}
-            animate={{ scale: 1 }}
-            transition={{
-              delay: T.tagline + i * T.taglineStagger + 0.06,
-              type: "spring",
-              stiffness: 600,
-              damping: 20,
-            }}
-          >
-            <Dot color={p.color} size={6} />
-          </motion.span>
-          {p.word}
-        </motion.span>
-      ))}
-
-      {/* Green available pulse */}
-      <motion.span
-        style={{
-          display: "inline-flex",
-          alignItems: "center",
-          gap: 6,
-          fontFamily: MONO,
-          fontSize: 11,
-          letterSpacing: "0.1em",
-          color: C.green,
-          marginLeft: "auto",
-        }}
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: T.tagline + PRINCIPLES.length * T.taglineStagger + 0.1 }}
-      >
-        <motion.span
-          animate={{ scale: [1, 1.5, 1] }}
-          transition={{ delay: 5.8, duration: 0.4, repeat: Infinity, repeatDelay: 2 }}
-        >
-          <Dot color={C.green} size={7} />
-        </motion.span>
-        available
-      </motion.span>
-    </motion.div>
-  );
-}
-
 // ─── main hero ───────────────────────────────────────────────────────────────
 
 export function SwissHero() {
@@ -723,9 +632,6 @@ export function SwissHero() {
             <AnimatedMetric key={i} idx={i} n={m.n} suffix={m.suffix} label={m.l} color={m.color} />
           ))}
         </div>
-
-        {/* ── Principles tagline ─────────────────────────── */}
-        <PrinciplesTagline />
 
       </div>
     </section>
