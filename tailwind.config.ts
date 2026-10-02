@@ -7,13 +7,35 @@ export default {
   theme: {
   	container: {
   		center: true,
-  		padding: '2rem',
+  		padding: '1rem',
   		screens: {
   			'2xl': '1400px'
   		}
   	},
   	extend: {
   		colors: {
+  			paper: 'hsl(var(--paper))',
+  			surface: 'hsl(var(--surface))',
+  			sunken: 'hsl(var(--sunken))',
+  			ink: {
+  				DEFAULT: 'hsl(var(--ink))',
+  				'2': 'hsl(var(--ink-2))'
+  			},
+  			mute: 'hsl(var(--mute))',
+  			line: {
+  				DEFAULT: 'hsl(var(--line))',
+  				strong: 'hsl(var(--line-strong))'
+  			},
+  			brand: {
+  				DEFAULT: 'hsl(var(--brand))',
+  				deep: 'hsl(var(--brand-deep))',
+  				mid: 'hsl(var(--brand-mid))',
+  				line: 'hsl(var(--brand-line))',
+  				text: 'hsl(var(--brand-text))',
+  				soft: 'hsl(var(--brand-soft))'
+  			},
+  			lime: 'hsl(var(--lime))',
+  			orange: 'hsl(var(--orange))',
   			border: 'hsl(var(--border))',
   			input: 'hsl(var(--input))',
   			ring: 'hsl(var(--ring))',
@@ -85,47 +107,23 @@ export default {
   			'accordion-down': 'accordion-down 0.2s ease-out',
   			'accordion-up': 'accordion-up 0.2s ease-out'
   		},
-  		boxShadow: {
-  			'2xs': 'var(--shadow-2xs)',
-  			xs: 'var(--shadow-xs)',
-  			sm: 'var(--shadow-sm)',
-  			md: 'var(--shadow-md)',
-  			lg: 'var(--shadow-lg)',
-  			xl: 'var(--shadow-xl)',
-  			'2xl': 'var(--shadow-2xl)'
-  		},
   		fontFamily: {
   			sans: [
-  				'DM Sans',
+  				'Nunito',
   				'ui-sans-serif',
   				'system-ui',
   				'-apple-system',
-  				'BlinkMacSystemFont',
   				'Segoe UI',
   				'Roboto',
   				'Helvetica Neue',
   				'Arial',
-  				'Noto Sans',
   				'sans-serif'
   			],
-  			serif: [
-  				'Crimson Pro',
-  				'ui-serif',
-  				'Georgia',
-  				'Cambria',
-  				'Times New Roman',
-  				'Times',
-  				'serif'
-  			],
   			mono: [
-  				'SF Mono',
   				'ui-monospace',
   				'SFMono-Regular',
   				'Menlo',
-  				'Monaco',
   				'Consolas',
-  				'Liberation Mono',
-  				'Courier New',
   				'monospace'
   			]
   		}

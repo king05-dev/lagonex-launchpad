@@ -1,150 +1,61 @@
-@import url("https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&display=swap");
-@import url("https://fonts.googleapis.com/css2?family=Crimson+Pro:wght@400;500;600;700&display=swap");
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-/* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
-All colors MUST be HSL.
+/*
+  Design tokens, taken from kapaldo.com so this page reads as part of it.
+  All colours are HSL channels so Tailwind can apply opacity.
+  The shadcn tokens below are mapped onto them so ui/* primitives match.
 */
-
 @layer base {
   :root {
-    --background: 213 24% 15%; /* #142335 */
-    --foreground: 210 40% 98%;
+    --paper: 42 65% 96%;        /* #FBF7EE Kapaldo cream */
+    --surface: 0 0% 100%;
+    --sunken: 130 25% 95%;      /* green-tinted band */
+    --ink: 221 39% 11%;         /* gray-900 */
+    --ink-2: 217 19% 27%;       /* gray-700 */
+    --mute: 220 9% 46%;         /* gray-500 */
+    --line: 220 13% 91%;        /* gray-200 */
+    --line-strong: 216 12% 84%; /* gray-300 */
 
-    --card: 213 25% 20%; /* #18354D */
-    --card-foreground: 210 40% 98%;
+    --brand: 135 44% 21%;       /* #1E4D2A header green */
+    --brand-deep: 144 65% 15%;  /* #0D3D20 primary button */
+    --brand-mid: 144 58% 27%;   /* #1D6E3E logo green */
+    --brand-line: 142 72% 29%;  /* green-700 outline */
+    --brand-text: 143 64% 24%;  /* green-800 */
+    --brand-soft: 138 76% 97%;  /* green-50 */
+    --lime: 82 85% 67%;         /* eyebrow on dark green */
+    --orange: 25 95% 53%;       /* #F97316 sign-in orange */
 
-    --popover: 213 25% 20%;
-    --popover-foreground: 210 40% 98%;
+    --background: var(--paper);
+    --foreground: var(--ink);
+    --card: var(--surface);
+    --card-foreground: var(--ink);
+    --popover: var(--surface);
+    --popover-foreground: var(--ink);
+    --primary: var(--brand-deep);
+    --primary-foreground: 0 0% 100%;
+    --secondary: var(--sunken);
+    --secondary-foreground: var(--ink);
+    --muted: var(--sunken);
+    --muted-foreground: var(--mute);
+    --accent: var(--sunken);
+    --accent-foreground: var(--ink);
+    --destructive: 0 72% 46%;
+    --destructive-foreground: 0 0% 100%;
+    --border: var(--line);
+    --input: var(--line);
+    --ring: var(--brand-line);
+    --radius: 1rem;
 
-    --primary: 189 77% 48%; /* #22ADD0 */
-    --primary-foreground: 213 24% 15%;
-
-    --secondary: 193 54% 39%; /* #227291 */
-    --secondary-foreground: 210 40% 98%;
-
-    --muted: 213 25% 25%;
-    --muted-foreground: 210 40% 70%;
-
-    --accent: 122 19% 46%; /* #79926B */
-    --accent-foreground: 210 40% 98%;
-
-    --destructive: 0 72% 50%;
-    --destructive-foreground: 0 85% 97%;
-
-    --border: 191 35% 30%; /* #224D63 */
-    --input: 191 35% 30%;
-    --ring: 189 77% 48%;
-
-    --radius: 0rem;
-
-    --sidebar-background: 0 0% 98%;
-
-    --sidebar-foreground: 210 40% 98%;
-
-    --sidebar-primary: 189 77% 48%; /* #22ADD0 */
-
-    --sidebar-primary-foreground: 213 24% 15%;
-
-    --sidebar-accent: 122 19% 46%; /* #79926B */
-
-    --sidebar-accent-foreground: 210 40% 98%;
-
-    --sidebar-border: 191 35% 30%; /* #224D63 */
-
-    --sidebar-ring: 189 77% 48%;
-
-    --chart-1: 189 77% 48%; /* #22ADD0 */
-
-    --chart-2: 193 54% 39%; /* #227291 */
-
-    --chart-3: 122 19% 46%; /* #79926B */
-
-    --chart-4: 213 25% 25%;
-
-    --chart-5: 213 25% 20%; /* #18354D */
-
-    --sidebar: 213 25% 20%; /* #18354D */
-
-    --font-sans: 'DM Sans', ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans', sans-serif;
-
-    --font-serif: 'Crimson Pro', ui-serif, Georgia, Cambria, 'Times New Roman', Times, serif;
-
-    --font-mono: 'SF Mono', ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace;
-
-    --shadow-2xs: 0 1px 3px 0px hsl(0 0% 0% / 0.05);
-
-    --shadow-xs: 0 1px 3px 0px hsl(0 0% 0% / 0.05);
-
-    --shadow-sm: 0 1px 3px 0px hsl(0 0% 0% / 0.1), 0 1px 2px -1px hsl(0 0% 0% / 0.1);
-
-    --shadow: 0 1px 3px 0px hsl(0 0% 0% / 0.1), 0 1px 2px -1px hsl(0 0% 0% / 0.1);
-
-    --shadow-md: 0 1px 3px 0px hsl(0 0% 0% / 0.1), 0 2px 4px -1px hsl(0 0% 0% / 0.1);
-
-    --shadow-lg: 0 1px 3px 0px hsl(0 0% 0% / 0.1), 0 4px 6px -1px hsl(0 0% 0% / 0.1);
-
-    --shadow-xl: 0 1px 3px 0px hsl(0 0% 0% / 0.1), 0 8px 10px -1px hsl(0 0% 0% / 0.1);
-
-    --shadow-2xl: 0 1px 3px 0px hsl(0 0% 0% / 0.25);
-
-    --tracking-normal: 0em;
-
-    --spacing: 0.25rem;
-  }
-
-  .dark {
-    --background: 213 24% 15%; /* #142335 */
-    --foreground: 210 40% 98%;
-
-    --card: 213 25% 20%; /* #18354D */
-    --card-foreground: 210 40% 98%;
-
-    --popover: 213 25% 20%;
-    --popover-foreground: 210 40% 98%;
-
-    --primary: 189 77% 48%; /* #22ADD0 */
-    --primary-foreground: 213 24% 15%;
-
-    --secondary: 193 54% 39%; /* #227291 */
-    --secondary-foreground: 210 40% 98%;
-
-    --muted: 213 25% 25%;
-    --muted-foreground: 210 40% 70%;
-
-    --accent: 122 19% 46%; /* #79926B */
-    --accent-foreground: 210 40% 98%;
-
-    --destructive: 0 84% 60%;
-    --destructive-foreground: 0 85% 97%;
-
-    --border: 191 35% 30%; /* #224D63 */
-    --input: 191 35% 30%;
-    --ring: 189 77% 48%;
-    --sidebar-background: 0 0% 98%;
-    --sidebar-foreground: 210 40% 98%;
-    --sidebar-primary: 189 77% 48%; /* #22ADD0 */
-    --sidebar-primary-foreground: 213 24% 15%;
-    --sidebar-accent: 122 19% 46%; /* #79926B */
-    --sidebar-accent-foreground: 210 40% 98%;
-    --sidebar-border: 191 35% 30%; /* #224D63 */
-    --sidebar-ring: 189 77% 48%;
-    --chart-1: 189 77% 48%; /* #22ADD0 */
-    --chart-2: 193 54% 39%; /* #227291 */
-    --chart-3: 122 19% 46%; /* #79926B */
-    --chart-4: 213 25% 25%;
-    --chart-5: 213 25% 20%; /* #18354D */
-    --sidebar: 213 25% 20%; /* #18354D */
-    --shadow-2xs: 0 1px 3px 0px hsl(0 0% 0% / 0.05);
-    --shadow-xs: 0 1px 3px 0px hsl(0 0% 0% / 0.05);
-    --shadow-sm: 0 1px 3px 0px hsl(0 0% 0% / 0.1), 0 1px 2px -1px hsl(0 0% 0% / 0.1);
-    --shadow: 0 1px 3px 0px hsl(0 0% 0% / 0.1), 0 1px 2px -1px hsl(0 0% 0% / 0.1);
-    --shadow-md: 0 1px 3px 0px hsl(0 0% 0% / 0.1), 0 2px 4px -1px hsl(0 0% 0% / 0.1);
-    --shadow-lg: 0 1px 3px 0px hsl(0 0% 0% / 0.1), 0 4px 6px -1px hsl(0 0% 0% / 0.1);
-    --shadow-xl: 0 1px 3px 0px hsl(0 0% 0% / 0.1), 0 8px 10px -1px hsl(0 0% 0% / 0.1);
-    --shadow-2xl: 0 1px 3px 0px hsl(0 0% 0% / 0.25);
+    --sidebar-background: var(--paper);
+    --sidebar-foreground: var(--ink);
+    --sidebar-primary: var(--brand-deep);
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: var(--sunken);
+    --sidebar-accent-foreground: var(--ink);
+    --sidebar-border: var(--line);
+    --sidebar-ring: var(--brand-line);
   }
 }
 
@@ -153,23 +64,86 @@ All colors MUST be HSL.
     @apply border-border;
   }
 
+  html {
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+  }
+
   body {
-    @apply bg-background text-foreground;
+    @apply bg-paper font-sans text-ink antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  ::selection {
+    background: hsl(var(--brand-mid) / 0.18);
+  }
+
+  :focus-visible {
+    outline: 2px solid hsl(var(--brand-line));
+    outline-offset: 3px;
+    border-radius: 8px;
+  }
+
+  [id] {
+    scroll-margin-top: 104px;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+}
+
+@layer components {
+  .container-x {
+    @apply mx-auto w-full max-w-6xl px-4 sm:px-6;
+  }
+
+  /* Kapaldo's small uppercase card label */
+  .eyebrow {
+    @apply text-[11px] font-extrabold uppercase tracking-[0.06em] text-brand-line;
+  }
+
+  .heading {
+    @apply font-extrabold tracking-tight text-ink;
+    line-height: 1.1;
+  }
+
+  .card {
+    @apply rounded-2xl border border-line bg-surface;
   }
 }
 
 @layer utilities {
-  .animate-shimmer {
-    animation: shimmer 3s ease-in-out infinite;
-    background-position: 0% 50%;
+  .text-balance {
+    text-wrap: balance;
+  }
+  .text-pretty {
+    text-wrap: pretty;
+  }
+  .no-scrollbar {
+    scrollbar-width: none;
+  }
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
   }
 }
 
-@keyframes shimmer {
-  0%, 100% {
-    background-position: 0% 50%;
+/* Moving dash used on workflow connectors */
+@keyframes flow-dash {
+  to {
+    stroke-dashoffset: -24;
   }
-  50% {
-    background-position: 100% 50%;
-  }
+}
+.flow-line {
+  stroke-dasharray: 4 8;
+  animation: flow-dash 1.6s linear infinite;
 }

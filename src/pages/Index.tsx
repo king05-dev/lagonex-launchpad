@@ -1,37 +1,29 @@
-import { SwissNavbar } from "@/components/swiss/SwissNavbar";
-import { SwissHero } from "@/components/swiss/SwissHero";
-import { SwissTools } from "@/components/swiss/SwissTools";
-import { SwissExperience } from "@/components/swiss/SwissExperience";
-import { SwissProjects } from "@/components/swiss/SwissProjects";
-import { SwissProcess } from "@/components/swiss/SwissProcess";
-import { SwissPersonal } from "@/components/swiss/SwissPersonal";
-import { SwissSkills } from "@/components/swiss/SwissSkills";
-import { SwissContact } from "@/components/swiss/SwissContact";
-import { SwissMessengerChat } from "@/components/swiss/SwissMessengerChat";
+import { useEffect } from "react";
+import { SITE } from "@/data/site";
+import { PageShell } from "@/components/common/PageShell";
+import { Hero } from "@/components/sections/Hero";
+import { About } from "@/components/sections/About";
+import { Experience } from "@/components/sections/Experience";
+import { PersonalProjects } from "@/components/sections/PersonalProjects";
+import { Portfolio } from "@/components/sections/Portfolio";
+import { Stack } from "@/components/sections/Stack";
+import { Contact } from "@/components/sections/Contact";
 
 const Index = () => {
+  useEffect(() => {
+    document.title = SITE.title;
+  }, []);
+
   return (
-    <div
-      style={{
-        backgroundColor: "#fafaf7",
-        color: "#0e0e0e",
-        fontFamily: '"Inter", system-ui, sans-serif',
-        minHeight: "100vh",
-      }}
-    >
-      <SwissNavbar />
-      <main>
-        <SwissHero />
-        <SwissTools />
-        <SwissExperience />
-        <SwissProjects />
-        <SwissProcess />
-        <SwissPersonal />
-        <SwissSkills />
-        <SwissContact />
-      </main>
-      <SwissMessengerChat />
-    </div>
+    <PageShell>
+      <Hero />
+      <About />
+      <Experience />
+      <PersonalProjects />
+      <Portfolio />
+      <Stack />
+      <Contact />
+    </PageShell>
   );
 };
 

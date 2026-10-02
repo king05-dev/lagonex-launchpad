@@ -22,3 +22,6 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# Playwright MCP captures (contain unblurred private data)
+.playwright-mcp/
