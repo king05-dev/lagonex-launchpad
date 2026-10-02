@@ -1,4 +1,5 @@
-import { ArrowUpRight, Lock } from "lucide-react";
+import { useCallback, useEffect, useRef, useState } from "react";
+import { ArrowUpRight, ChevronLeft, ChevronRight, Lock } from "lucide-react";
 import { PORTFOLIO, type Project } from "@/data/projects";
 import { RESUME } from "@/data/resume";
 import { Chips, Eyebrow, SectionHeader, Screen, TextLink } from "@/components/common/primitives";
@@ -134,14 +135,7 @@ function PortfolioEntry({ project: p }: { project: Project }) {
         {/* More real screens */}
         {rest.length > 0 && (
           <div className="border-t border-line bg-gray-50/60 py-5 sm:py-6">
-            <ul className="no-scrollbar flex snap-x gap-4 overflow-x-auto px-5 sm:px-8" aria-label={`More ${p.name} screens`}>
-              {rest.map((s) => (
-                <li key={s.src} className="w-[240px] shrink-0 snap-start sm:w-[280px]">
-                  <Screen src={s.src} alt={s.alt} className="shadow-md" />
-                  <p className="mt-2 text-[12px] font-bold text-gray-600">{s.caption}</p>
-                </li>
-              ))}
-            </ul>
+            <ScreenStrip project={p} screens={rest} />
             {p.note && !p.workflowLanes && (
               <p className="mt-4 inline-flex items-center gap-1.5 px-5 text-[12px] font-semibold text-gray-500 sm:px-8">
                 <Lock size={12} aria-hidden /> {p.note}
@@ -151,6 +145,63 @@ function PortfolioEntry({ project: p }: { project: Project }) {
         )}
       </article>
     </Reveal>
+  );
+}
+
+/** Horizontal row of extra screens, with arrows and an edge fade so it reads as scrollable. */
+function ScreenStrip({ project: p, screens }: { project: Project; screens: Project["screens"] }) {
+  const ref = useRef<HTMLUListElement>(null);
+  const [canPrev, setCanPrev] = useState(false);
+  const [canNext, setCanNext] = useState(false);
+
+  const update = useCallback(() => {
+    const el = ref.current;
+    if (!el) return;
+    setCanPrev(el.scrollLeft > 4);
+    setCanNext(el.scrollLeft + el.clientWidth < el.scrollWidth - 4);
+  }, []);
+
+  useEffect(() => {
+    update();
+    window.addEventListener("resize", update);
+    return () => window.removeEventListener("resize", update);
+  }, [update]);
+
+  const scroll = (dir: 1 | -1) => ref.current?.scrollBy({ left: dir * ref.current.clientWidth * 0.8, behavior: "smooth" });
+  const arrow =
+    "flex h-9 w-9 items-center justify-center rounded-full border border-line bg-white text-gray-800 shadow-sm transition hover:bg-gray-50 disabled:cursor-default disabled:opacity-35";
+
+  return (
+    <>
+      <div className="mb-3 flex items-center justify-between gap-4 px-5 sm:px-8">
+        <p className="text-[13px] font-extrabold text-gray-800">
+          More screens <span className="font-bold text-gray-500">· {screens.length}</span>
+        </p>
+        {(canPrev || canNext) && (
+          <div className="flex items-center gap-2">
+            <button type="button" onClick={() => scroll(-1)} disabled={!canPrev} className={arrow} aria-label={`Previous ${p.name} screens`}>
+              <ChevronLeft size={18} aria-hidden />
+            </button>
+            <button type="button" onClick={() => scroll(1)} disabled={!canNext} className={arrow} aria-label={`Next ${p.name} screens`}>
+              <ChevronRight size={18} aria-hidden />
+            </button>
+          </div>
+        )}
+      </div>
+      <div className="relative">
+        <ul ref={ref} onScroll={update} className="no-scrollbar flex snap-x gap-4 overflow-x-auto scroll-px-5 px-5 sm:scroll-px-8 sm:px-8" aria-label={`More ${p.name} screens`}>
+          {screens.map((s) => (
+            <li key={s.src} className="w-[240px] shrink-0 snap-start sm:w-[280px]">
+              <Screen src={s.src} alt={s.alt} className="shadow-md" />
+              <p className="mt-2 text-[12px] font-bold text-gray-600">{s.caption}</p>
+            </li>
+          ))}
+        </ul>
+        {/* Edge fades hint that the row continues */}
+        <div aria-hidden className={`pointer-events-none absolute inset-y-0 left-0 w-10 bg-gradient-to-r from-gray-50 to-transparent transition-opacity ${canPrev ? "opacity-100" : "opacity-0"}`} />
+        <div aria-hidden className={`pointer-events-none absolute inset-y-0 right-0 w-16 bg-gradient-to-l from-gray-50 to-transparent transition-opacity ${canNext ? "opacity-100" : "opacity-0"}`} />
+      </div>
+    </>
   );
 }
 
