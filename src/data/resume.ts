@@ -1,3 +1,4 @@
+import { asset } from "@/lib/asset";
 /*
   Resume facts. Experience bullets come from examrefresher.com/developer/resume;
   dates follow the newer jerquin-resume.pages.dev timeline (Freelance from Oct 2025).
@@ -93,7 +94,7 @@ export const RESUME = {
       status: "Live",
       summary: "Role-based dashboards for doctors, pharmacists and admins.",
       stack: ["React", "Laravel", "AWS", "MySQL"],
-      image: "/images/work/greenlife.jpg",
+      image: asset("/images/work/greenlife.jpg"),
       href: "https://greenlifeclinics.com.au/existing-patient-booking/",
       site: "greenlifeclinics.com.au",
     },
@@ -102,7 +103,7 @@ export const RESUME = {
       status: "Live",
       summary: "Shopify store for active-form methylation supplements.",
       stack: ["Shopify", "Liquid"],
-      image: "/images/work/cleanhealthlab.jpg",
+      image: asset("/images/work/cleanhealthlab.jpg"),
       href: "https://cleanhealthlab.com/",
       site: "cleanhealthlab.com",
     },
@@ -111,7 +112,7 @@ export const RESUME = {
       status: "Live",
       summary: "Shopify store for scent diffusers and fragrance oils for homes and businesses.",
       stack: ["Shopify", "Liquid"],
-      image: "/images/work/whiffedaromas.jpg",
+      image: asset("/images/work/whiffedaromas.jpg"),
       href: "https://whiffedaromas.com/",
       site: "whiffedaromas.com",
     },
@@ -120,7 +121,7 @@ export const RESUME = {
       status: "Deployed",
       summary: "Custom theme with a “find the right fit” flow built as a Shopify app.",
       stack: ["Shopify", "Liquid", "JavaScript"],
-      image: "/images/work/sway.jpg",
+      image: asset("/images/work/sway.jpg"),
       href: "https://sway-co.com/",
       site: "sway-co.com",
     },
@@ -129,7 +130,7 @@ export const RESUME = {
       status: "Staging",
       summary: "Custom WordPress theme for a consulate website.",
       stack: ["WordPress", "PHP", "JavaScript"],
-      image: "/images/work/consul.jpg",
+      image: asset("/images/work/consul.jpg"),
       site: "Staging",
     },
     {
@@ -137,7 +138,7 @@ export const RESUME = {
       status: "Acquired",
       summary: "Requests for payroll and attendance, time tracking, compliance and company announcements. This project has been acquired.",
       stack: ["React", "Laravel", "MySQL", "Tailwind"],
-      image: "/images/work/hris.jpg",
+      image: asset("/images/work/hris.jpg"),
       site: "hris.fligno.com",
     },
   ] satisfies ClientProject[],

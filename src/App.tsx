@@ -31,7 +31,7 @@ function ScrollManager() {
 }
 
 const App = () => (
-  <BrowserRouter>
+  <BrowserRouter basename={import.meta.env.BASE_URL.replace(/\/$/, "")}>
     <ScrollManager />
     <Suspense fallback={<div className="min-h-screen bg-paper" />}>
       <Routes>

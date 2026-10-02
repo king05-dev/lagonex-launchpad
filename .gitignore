@@ -25,3 +25,5 @@ dist-ssr
 
 # Playwright MCP captures (contain unblurred private data)
 .playwright-mcp/
+
+dist-kapaldo/

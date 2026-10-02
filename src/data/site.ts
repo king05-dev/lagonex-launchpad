@@ -1,3 +1,4 @@
+import { asset } from "@/lib/asset";
 import { RESUME } from "./resume";
 
 export const SITE = {
@@ -12,7 +13,7 @@ export const SITE = {
   embeddedInKapaldo: true,
   kapaldoUrl: "https://kapaldo.com",
   portrait: {
-    src: "/images/jerquin-bayudo.webp",
+    src: asset("/images/jerquin-bayudo.webp"),
     width: 1024,
     height: 1280,
     alt: "Portrait of Jerquin Bayudo wearing glasses and a dark jacket",
