@@ -9,11 +9,16 @@ import { EASE } from "@/components/common/motion";
 function Lockup() {
   if (SITE.embeddedInKapaldo) {
     return (
-      <Link to="/" className="flex items-center gap-2.5" aria-label={`${SITE.name}, developer page`}>
-        <KapaldoLogo className="h-8 w-8 shrink-0" />
-        <span className="text-lg font-extrabold text-white">Kapaldo</span>
-        <span className="rounded-full bg-white/15 px-2.5 py-0.5 text-[11px] font-bold text-white/90">Developer</span>
-      </Link>
+      <div className="flex items-center gap-2.5">
+        {/* Logo goes to the Kapaldo homepage; the pill stays on the developer page. */}
+        <a href={SITE.kapaldoUrl} className="flex items-center gap-2.5" aria-label="Kapaldo home">
+          <KapaldoLogo className="h-8 w-8 shrink-0" />
+          <span className="text-lg font-extrabold text-white">Kapaldo</span>
+        </a>
+        <Link to="/" className="rounded-full bg-white/15 px-2.5 py-0.5 text-[11px] font-bold text-white/90 hover:bg-white/25" aria-label={`${SITE.name}, developer page`}>
+          Developer
+        </Link>
+      </div>
     );
   }
   return (
