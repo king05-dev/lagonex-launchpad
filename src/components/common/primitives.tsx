@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { ArrowRight, ArrowUpRight } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { Reveal } from "./motion";
+import { Zoomable } from "./Lightbox";
 
 /** Kapaldo's mark: green rounded square with a white location pin and store. */
 export function KapaldoLogo({ className }: { className?: string }) {
@@ -154,7 +155,7 @@ export function Chips({ items, className, color, tint }: { items: readonly strin
 }
 
 /** Screenshot in a light browser frame. */
-export function Screen({ src, alt, className, eager = false, url }: { src: string; alt: string; className?: string; eager?: boolean; url?: string }) {
+export function Screen({ src, alt, caption, className, eager = false, url }: { src: string; alt: string; caption?: string; className?: string; eager?: boolean; url?: string }) {
   return (
     <figure className={cn("overflow-hidden rounded-xl border border-black/10 bg-white shadow-xl shadow-black/10", className)}>
       <div className="flex h-7 items-center gap-1.5 border-b border-black/5 bg-gray-50 px-3" aria-hidden>
@@ -163,7 +164,9 @@ export function Screen({ src, alt, className, eager = false, url }: { src: strin
         <span className="h-2 w-2 rounded-full bg-gray-300" />
         {url && <span className="ml-2 truncate text-[10px] font-semibold text-gray-400">{url}</span>}
       </div>
-      <img src={src} alt={alt} width={1440} height={900} loading={eager ? "eager" : "lazy"} decoding="async" className="block aspect-[16/10] w-full object-cover object-top" />
+      <Zoomable src={src} alt={alt} caption={caption}>
+        <img src={src} alt={alt} width={1440} height={900} loading={eager ? "eager" : "lazy"} decoding="async" className="block aspect-[16/10] w-full object-cover object-top" />
+      </Zoomable>
     </figure>
   );
 }

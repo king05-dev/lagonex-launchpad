@@ -2,6 +2,7 @@ import { BookOpenCheck, ClipboardList, Database, FolderTree, Lightbulb, ListChec
 import { PERSONAL } from "@/data/projects";
 import { Chips, SectionHeader, Screen, TextLink } from "@/components/common/primitives";
 import { Reveal } from "@/components/common/motion";
+import { Zoomable } from "@/components/common/Lightbox";
 
 const FEATURE_ICONS: LucideIcon[] = [ClipboardList, FolderTree, ListChecks, BookOpenCheck, Lightbulb, Shuffle, Settings2, Database];
 
@@ -12,7 +13,7 @@ export function PersonalProjects() {
         <SectionHeader id="projects-title" eyebrow="Personal projects" title="Outside of client work" lede="A product I keep building on my own time." />
 
         {PERSONAL.map((p) => (
-          <Reveal key={p.slug} className="mt-10 overflow-hidden rounded-3xl border border-line bg-white">
+          <Reveal key={p.slug} data-gallery className="mt-10 overflow-hidden rounded-3xl border border-line bg-white">
             {/* Preview stage in Exam Refresher's own colours */}
             <div className="relative px-5 pb-0 pt-6 sm:px-10 sm:pt-10" style={{ background: p.brand.stage }}>
               <div className="flex flex-wrap items-center justify-between gap-3">
@@ -24,14 +25,9 @@ export function PersonalProjects() {
                   </span>
                 )}
               </div>
-              <img
-                src={p.cover.src}
-                alt={p.cover.alt}
-                width={1600}
-                height={924}
-                loading="lazy"
-                className="mx-auto mt-4 block w-full max-w-3xl"
-              />
+              <Zoomable src={p.cover.src} alt={p.cover.alt} className="mx-auto mt-4 max-w-3xl">
+                <img src={p.cover.src} alt={p.cover.alt} width={1600} height={924} loading="lazy" className="block w-full" />
+              </Zoomable>
             </div>
 
             <div className="grid gap-8 p-5 sm:p-10 lg:grid-cols-[1fr_1.15fr] lg:gap-12">
@@ -78,7 +74,7 @@ export function PersonalProjects() {
             <div className="grid gap-4 border-t border-line bg-gray-50/50 p-5 sm:grid-cols-2 sm:p-10">
               {p.screens.map((s) => (
                 <figure key={s.src}>
-                  <Screen src={s.src} alt={s.alt} url={p.links[0]?.label} />
+                  <Screen src={s.src} alt={s.alt} caption={s.caption} url={p.links[0]?.label} />
                   <figcaption className="mt-2 text-[12px] font-bold text-gray-500">{s.caption}</figcaption>
                 </figure>
               ))}

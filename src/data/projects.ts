@@ -202,7 +202,7 @@ export const PROJECTS: readonly Project[] = [
       { title: "Data management", body: "Import and export quizzes as CSV." },
     ],
     stack: ["React", "Tailwind CSS"],
-    links: [{ label: "examrefresher.com", href: "https://examrefresher.com" }],
+    links: [{ label: "examrefresher-user.pages.dev", href: "https://examrefresher-user.pages.dev/home" }],
   },
 ];
 

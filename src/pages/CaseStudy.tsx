@@ -5,6 +5,7 @@ import { ArrowLeft, ArrowRight, Lock } from "lucide-react";
 import { getNextProject, getProject, type Project } from "@/data/projects";
 import { SITE } from "@/data/site";
 import { PageShell } from "@/components/common/PageShell";
+import { Zoomable } from "@/components/common/Lightbox";
 import { ActionLink, Chips, Eyebrow, Screen } from "@/components/common/primitives";
 import { EASE, Reveal } from "@/components/common/motion";
 import { ProjectLogo } from "@/components/projects/ProjectLogo";
@@ -87,7 +88,9 @@ function CaseHero({ project: p }: { project: Project }) {
         >
           <ProjectLogo project={p} className="mb-5" />
           {composite ? (
-            <img src={p.cover.src} alt={p.cover.alt} width={1600} height={924} className="mx-auto block w-full max-w-4xl" />
+            <Zoomable src={p.cover.src} alt={p.cover.alt} className="mx-auto max-w-4xl">
+              <img src={p.cover.src} alt={p.cover.alt} width={1600} height={924} className="block w-full" />
+            </Zoomable>
           ) : (
             <div className="mx-auto max-w-4xl">
               <Screen src={p.cover.src} alt={p.cover.alt} url={p.links[0]?.label} eager />
@@ -190,7 +193,7 @@ const CaseStudyPage = () => {
               {p.screens.map((s, i) => (
                 <Reveal key={s.src} delay={(i % 2) * 0.05}>
                   <figure>
-                    <Screen src={s.src} alt={s.alt} />
+                    <Screen src={s.src} alt={s.alt} caption={s.caption} />
                     <figcaption className="mt-2 text-[13px] font-bold text-gray-600">{s.caption}</figcaption>
                   </figure>
                 </Reveal>

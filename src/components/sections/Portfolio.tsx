@@ -4,6 +4,7 @@ import { PORTFOLIO, type Project } from "@/data/projects";
 import { RESUME } from "@/data/resume";
 import { Chips, Eyebrow, SectionHeader, Screen, TextLink } from "@/components/common/primitives";
 import { Reveal } from "@/components/common/motion";
+import { Zoomable } from "@/components/common/Lightbox";
 import { ProjectLogo } from "@/components/projects/ProjectLogo";
 import { Workflow } from "@/components/case-studies/Workflow";
 
@@ -58,7 +59,7 @@ function PortfolioEntry({ project: p }: { project: Project }) {
             <Screen src={p.cover.src} alt={p.cover.alt} url={p.links[0]?.label} />
             <div className="grid grid-cols-2 gap-4 lg:grid-cols-1">
               {side.map((s) => (
-                <Screen key={s.src} src={s.src} alt={s.alt} />
+                <Screen key={s.src} src={s.src} alt={s.alt} caption={s.caption} />
               ))}
             </div>
           </div>
@@ -192,7 +193,7 @@ function ScreenStrip({ project: p, screens }: { project: Project; screens: Proje
         <ul ref={ref} onScroll={update} className="no-scrollbar flex snap-x gap-4 overflow-x-auto scroll-px-5 px-5 sm:scroll-px-8 sm:px-8" aria-label={`More ${p.name} screens`}>
           {screens.map((s) => (
             <li key={s.src} className="w-[240px] shrink-0 snap-start sm:w-[280px]">
-              <Screen src={s.src} alt={s.alt} className="shadow-md" />
+              <Screen src={s.src} alt={s.alt} caption={s.caption} className="shadow-md" />
               <p className="mt-2 text-[12px] font-bold text-gray-600">{s.caption}</p>
             </li>
           ))}
@@ -212,13 +213,13 @@ function ClientProjects() {
         <Eyebrow>Client projects</Eyebrow>
         <h3 className="heading mt-2 text-[22px] sm:text-[26px]">Selected client work</h3>
       </Reveal>
-      <div className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+      <div data-gallery className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
         {RESUME.clientProjects.map((c, i) => (
           <Reveal key={c.name} delay={i * 0.04} className="h-full">
             <article className="card flex h-full flex-col overflow-hidden transition-shadow hover:shadow-md">
-              <div className="aspect-[16/9] overflow-hidden bg-gray-100">
+              <Zoomable src={c.image} alt={`${c.name} screenshot`} caption={c.name} className="aspect-[16/9] overflow-hidden bg-gray-100">
                 <img src={c.image} alt={`${c.name} screenshot`} width={1600} height={900} loading="lazy" className="h-full w-full object-cover object-top" />
-              </div>
+              </Zoomable>
               <div className="flex flex-1 flex-col p-4">
                 <p className="eyebrow">{c.status}</p>
                 <p className="mt-1 text-[15px] font-extrabold text-gray-900">{c.name}</p>
