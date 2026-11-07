@@ -170,3 +170,23 @@ export function Screen({ src, alt, caption, className, eager = false, url }: { s
     </figure>
   );
 }
+
+/** A phone-sized screen (for mobile-first products). */
+export function PhoneScreen({ src, alt, caption, className, eager = false }: { src: string; alt: string; caption?: string; className?: string; eager?: boolean }) {
+  return (
+    <div className={cn("rounded-[1.6rem] bg-gray-900 p-1.5 shadow-xl shadow-black/15", className)}>
+      <Zoomable src={src} alt={alt} caption={caption} className="overflow-hidden rounded-[1.2rem]">
+        <img src={src} alt={alt} width={600} height={1298} loading={eager ? "eager" : "lazy"} decoding="async" className="block aspect-[390/844] w-full bg-white object-cover object-top" />
+      </Zoomable>
+    </div>
+  );
+}
+
+/** Product explainer video. Nothing loads until the visitor presses play. */
+export function ProjectVideoPlayer({ src, poster, title, className }: { src: string; poster: string; title: string; className?: string }) {
+  return (
+    <figure className={cn("overflow-hidden rounded-2xl bg-black shadow-xl shadow-black/15", className)}>
+      <video src={src} poster={poster} controls preload="none" playsInline aria-label={title} title={title} width={1280} height={720} className="block aspect-video w-full" />
+    </figure>
+  );
+}

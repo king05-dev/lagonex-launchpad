@@ -6,7 +6,7 @@ import { getNextProject, getProject, type Project } from "@/data/projects";
 import { SITE } from "@/data/site";
 import { PageShell } from "@/components/common/PageShell";
 import { Zoomable } from "@/components/common/Lightbox";
-import { ActionLink, Chips, Eyebrow, Screen } from "@/components/common/primitives";
+import { ActionLink, Chips, Eyebrow, PhoneScreen, ProjectVideoPlayer, Screen } from "@/components/common/primitives";
 import { EASE, Reveal } from "@/components/common/motion";
 import { ProjectLogo } from "@/components/projects/ProjectLogo";
 import { Workflow } from "@/components/case-studies/Workflow";
@@ -87,7 +87,9 @@ function CaseHero({ project: p }: { project: Project }) {
           style={{ background: p.brand.stage, color: p.brand.stageText }}
         >
           <ProjectLogo project={p} className="mb-5" />
-          {composite ? (
+          {p.video ? (
+            <ProjectVideoPlayer {...p.video} className="mx-auto max-w-4xl" />
+          ) : composite ? (
             <Zoomable src={p.cover.src} alt={p.cover.alt} className="mx-auto max-w-4xl">
               <img src={p.cover.src} alt={p.cover.alt} width={1600} height={924} className="block w-full" />
             </Zoomable>
@@ -189,11 +191,11 @@ const CaseStudyPage = () => {
 
         {p.screens.length > 0 && (
           <Block eyebrow="Screens" title="Real screens from the product">
-            <div className="grid gap-6 sm:grid-cols-2">
+            <div className={p.device === "phone" ? "grid grid-cols-2 gap-5 sm:grid-cols-4" : "grid gap-6 sm:grid-cols-2"}>
               {p.screens.map((s, i) => (
                 <Reveal key={s.src} delay={(i % 2) * 0.05}>
                   <figure>
-                    <Screen src={s.src} alt={s.alt} caption={s.caption} />
+                    {p.device === "phone" ? <PhoneScreen src={s.src} alt={s.alt} caption={s.caption} /> : <Screen src={s.src} alt={s.alt} caption={s.caption} />}
                     <figcaption className="mt-2 text-[13px] font-bold text-gray-600">{s.caption}</figcaption>
                   </figure>
                 </Reveal>

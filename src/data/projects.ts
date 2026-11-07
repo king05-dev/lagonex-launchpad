@@ -20,7 +20,13 @@ export interface Brand {
   accent: string;
   /** Soft tint for chips and icons */
   tint: string;
-  logo: { src?: string; alt: string; width: number; height: number; kapaldo?: boolean };
+  logo: { src?: string; alt: string; width: number; height: number; kapaldo?: boolean; /** Wordmark when the product has no logo file */ text?: string };
+}
+
+export interface ProjectVideo {
+  src: string;
+  poster: string;
+  title: string;
 }
 
 export interface Feature {
@@ -38,6 +44,9 @@ export interface Project {
   summary: string;
   framing?: string;
   chips: readonly string[];
+  /** "phone" shows screens in a phone frame instead of a browser window */
+  device?: "phone";
+  video?: ProjectVideo;
   status?: string;
   brand: Brand;
   cover: Shot;
@@ -203,6 +212,58 @@ export const PROJECTS: readonly Project[] = [
     ],
     stack: ["React", "Tailwind CSS"],
     links: [{ label: "examrefresher-user.pages.dev", href: "https://examrefresher-user.pages.dev/home" }],
+  },
+  {
+    slug: "agrifarm",
+    index: "P2",
+    kind: "personal",
+    name: "AgriFarm",
+    category: "AI Farm Planner / Agriculture",
+    subtitle: "AI Farm Planner / Agriculture",
+    summary: "A farm planner for small farms in the Philippines. Its AI planner, Farm Brain, turns a plot, its soil and the weather into a crop plan, a budget and a calendar of to-dos.",
+    chips: ["Farm Brain AI", "Crop plans", "Daily to-dos"],
+    status: "In development",
+    device: "phone",
+    brand: {
+      stage: "linear-gradient(135deg, #EEF6E9 0%, #DFF1DD 100%)",
+      stageText: "#1C1B17",
+      accent: "#2F7A33",
+      tint: "#DFF1DD",
+      logo: { alt: "AgriFarm", width: 160, height: 40, text: "AgriFarm" },
+    },
+    video: {
+      src: asset("/videos/agrifarm-explainer.mp4"),
+      poster: asset("/images/work/agrifarm-explainer-poster.jpg"),
+      title: "AgriFarm explainer: Juan plans his squash crop",
+    },
+    cover: { src: asset("/images/work/agrifarm-plan.jpg"), alt: "AgriFarm crop plan with expected yield, budget and risks", caption: "The plan" },
+    screens: [
+      { src: asset("/images/work/agrifarm-new-farm.jpg"), alt: "AgriFarm new farm setup, choosing a crop", caption: "Add a farm" },
+      { src: asset("/images/work/agrifarm-farm-brain.jpg"), alt: "Farm Brain researching weather, soil and growing guides", caption: "Farm Brain at work" },
+      { src: asset("/images/work/agrifarm-plan.jpg"), alt: "AgriFarm plan with expected yield, budget and risks", caption: "The plan" },
+      { src: asset("/images/work/agrifarm-timeline.jpg"), alt: "AgriFarm timeline of upcoming tasks", caption: "Timeline" },
+      { src: asset("/images/work/agrifarm-todo.jpg"), alt: "AgriFarm to-do with what to do and what you'll need", caption: "To-do" },
+      { src: asset("/images/work/agrifarm-home.jpg"), alt: "AgriFarm home with today's tasks and a rain alert", caption: "Today & weather" },
+      { src: asset("/images/work/agrifarm-notebook.jpg"), alt: "AgriFarm notebook, adding a note about the plot", caption: "Notebook" },
+      { src: asset("/images/work/agrifarm-next-crop.jpg"), alt: "AgriFarm plan for the next crop on the same plot", caption: "Next crop" },
+    ],
+    overview: [
+      "A farmer adds a plot, answers two soil questions and picks a crop. Farm Brain checks the 16-day forecast, past rainfall and the soil, then writes two plans to compare: when to plant, expected yield, cost and risks. If something is different, like using seed saved from the last harvest, the farmer taps Change it and the plan is rewritten.",
+      "Picking a plan puts its tasks on a calendar. Each to-do says why it matters, what to do and what's needed. Home shows what's due today alongside weather alerts, and the farmer keeps a notebook and logs expenses. Before a crop is done, the next one can be planned on the same plot.",
+    ],
+    features: [
+      { title: "Farm setup", body: "Plot size, location on the map, crop and two soil questions." },
+      { title: "Farm Brain", body: "AI planner that reads the forecast, rainfall history and soil." },
+      { title: "Two plans", body: "Planting window, yield, cost and risks, side by side." },
+      { title: "Change it", body: "Tell Farm Brain what's different and the plan is rewritten." },
+      { title: "To-dos", body: "Each task explains why, what to do and what you'll need." },
+      { title: "Today & weather", body: "What's due today, with alerts like holding off on spraying." },
+      { title: "Notebook & expenses", body: "Notes about the land and spending against the plan's budget." },
+      { title: "Next crop", body: "Plan what follows on the same plot before the harvest." },
+    ],
+    stack: ["Flutter", "Hono", "Cloudflare Workers", "Supabase", "Gemini"],
+    links: [{ label: "farm.kapaldo.com", href: "https://farm.kapaldo.com" }],
+    note: "Screens are from a demo farm set up for the explainer.",
   },
 ];
 

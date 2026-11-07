@@ -1,6 +1,7 @@
 import { BookOpenCheck, ClipboardList, Database, FolderTree, Lightbulb, ListChecks, Settings2, Shuffle, type LucideIcon } from "lucide-react";
 import { PERSONAL } from "@/data/projects";
-import { Chips, SectionHeader, Screen, TextLink } from "@/components/common/primitives";
+import { Chips, PhoneScreen, ProjectVideoPlayer, SectionHeader, Screen, TextLink } from "@/components/common/primitives";
+import { ProjectLogo } from "@/components/projects/ProjectLogo";
 import { Reveal } from "@/components/common/motion";
 import { Zoomable } from "@/components/common/Lightbox";
 
@@ -10,14 +11,18 @@ export function PersonalProjects() {
   return (
     <section id="projects" aria-labelledby="projects-title" className="py-14 sm:py-20">
       <div className="container-x">
-        <SectionHeader id="projects-title" eyebrow="Personal projects" title="Outside of client work" lede="A product I keep building on my own time." />
+        <SectionHeader id="projects-title" eyebrow="Personal projects" title="Outside of client work" lede="Products I keep building on my own time." />
 
         {PERSONAL.map((p) => (
           <Reveal key={p.slug} data-gallery className="mt-10 overflow-hidden rounded-3xl border border-line bg-white">
-            {/* Preview stage in Exam Refresher's own colours */}
+            {/* Preview stage in the product's own colours */}
             <div className="relative px-5 pb-0 pt-6 sm:px-10 sm:pt-10" style={{ background: p.brand.stage }}>
               <div className="flex flex-wrap items-center justify-between gap-3">
-                <img src={p.brand.logo.src} alt={p.brand.logo.alt} width={p.brand.logo.width} height={p.brand.logo.height} className="h-9 w-auto sm:h-11" />
+                {p.brand.logo.src ? (
+                  <img src={p.brand.logo.src} alt={p.brand.logo.alt} width={p.brand.logo.width} height={p.brand.logo.height} className="h-9 w-auto sm:h-11" />
+                ) : (
+                  <ProjectLogo project={p} />
+                )}
                 {p.status && (
                   <span className="inline-flex items-center gap-1.5 rounded-full bg-white px-3 py-1 text-[11px] font-extrabold uppercase tracking-[0.04em]" style={{ color: p.brand.accent }}>
                     <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-current" aria-hidden />
@@ -25,9 +30,15 @@ export function PersonalProjects() {
                   </span>
                 )}
               </div>
-              <Zoomable src={p.cover.src} alt={p.cover.alt} className="mx-auto mt-4 max-w-3xl">
-                <img src={p.cover.src} alt={p.cover.alt} width={1600} height={924} loading="lazy" className="block w-full" />
-              </Zoomable>
+              {p.video ? (
+                <div className="mx-auto mt-5 max-w-3xl pb-6 sm:pb-10">
+                  <ProjectVideoPlayer {...p.video} />
+                </div>
+              ) : (
+                <Zoomable src={p.cover.src} alt={p.cover.alt} className="mx-auto mt-4 max-w-3xl">
+                  <img src={p.cover.src} alt={p.cover.alt} width={1600} height={924} loading="lazy" className="block w-full" />
+                </Zoomable>
+              )}
             </div>
 
             <div className="grid gap-8 p-5 sm:p-10 lg:grid-cols-[1fr_1.15fr] lg:gap-12">
@@ -71,10 +82,10 @@ export function PersonalProjects() {
               </ul>
             </div>
 
-            <div className="grid gap-4 border-t border-line bg-gray-50/50 p-5 sm:grid-cols-2 sm:p-10">
-              {p.screens.map((s) => (
+            <div className={`grid gap-4 border-t border-line bg-gray-50/50 p-5 sm:p-10 ${p.device === "phone" ? "grid-cols-2 sm:grid-cols-4" : "sm:grid-cols-2"}`}>
+              {(p.device === "phone" ? p.screens.slice(0, 4) : p.screens).map((s) => (
                 <figure key={s.src}>
-                  <Screen src={s.src} alt={s.alt} caption={s.caption} url={p.links[0]?.label} />
+                  {p.device === "phone" ? <PhoneScreen src={s.src} alt={s.alt} caption={s.caption} /> : <Screen src={s.src} alt={s.alt} caption={s.caption} url={p.links[0]?.label} />}
                   <figcaption className="mt-2 text-[12px] font-bold text-gray-500">{s.caption}</figcaption>
                 </figure>
               ))}
