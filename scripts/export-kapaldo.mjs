@@ -25,7 +25,7 @@ const siteUrl = "https://kapaldo.com/developer/";
 execSync("npx vite build --mode kapaldo --outDir dist-kapaldo --emptyOutDir", { cwd: root, stdio: "inherit" });
 const ssrOut = join(root, "dist-kapaldo-ssr");
 execSync("npx vite build --mode kapaldo --ssr src/entry-server.tsx --outDir dist-kapaldo-ssr --emptyOutDir", { cwd: root, stdio: "inherit" });
-const { render } = await import(pathToFileURL(join(ssrOut, "entry-server.js")).href);
+const { render, PROJECTS } = await import(pathToFileURL(join(ssrOut, "entry-server.js")).href);
 
 // Root-level files that belong to the standalone site, plus unused legacy assets.
 for (const f of ["_redirects", "robots.txt", "hero-images", "placeholder.svg"]) rmSync(join(out, f), { recursive: true, force: true });
@@ -33,8 +33,30 @@ for (const f of ["_redirects", "robots.txt", "hero-images", "placeholder.svg"]) 
 const esc = (s) => s.replace(/&/g, "&amp;").replace(/"/g, "&quot;").replace(/</g, "&lt;");
 const shell = readFileSync(join(out, "index.html"), "utf8");
 
-function page({ title, description, url, route }) {
-  const html = render(route);
+/*
+  framer-motion renders each element's start state (opacity:0, shifted down)
+  into the HTML. The browser re-renders and animates anyway, so the static copy
+  starts visible: crawlers and no-JS readers shouldn't get hidden text. Those
+  elements are tagged so a browser that does run JS still hides them until the
+  app mounts and fades them in (no flash of text that then blinks out).
+*/
+const FADE_GUARD = '<script>document.documentElement.classList.add("js")</script><style>.js [data-ssr-fade]{opacity:0}</style>';
+function visible(html) {
+  return html.replace(/ style="([^"]*)"/g, (_, css) => {
+    const kept = css
+      .split(";")
+      .filter((d) => d && !/^opacity:0$/.test(d.trim()) && !/^transform:translate[XYZ3d]*\(/.test(d.trim()) && !/^transform:none$/.test(d.trim()))
+      .join(";");
+    const tag = css.split(";").some((d) => d.trim() === "opacity:0") ? " data-ssr-fade" : "";
+    return (kept ? ` style="${kept}"` : "") + tag;
+  });
+}
+
+const PERSON = { "@id": `${siteUrl}#person` };
+const jsonLd = (data) => `<script type="application/ld+json">${JSON.stringify({ "@context": "https://schema.org", ...data }).replace(/</g, "\\u003c")}</script>`;
+
+function page({ title, description, url, route, ld }) {
+  const html = visible(render(route));
   if (!html.includes("<h1") && !html.includes("<h2")) throw new Error(`Pre-render of ${route} produced no headings`);
   return shell
     .replace('<div id="root"></div>', () => `<div id="root">${html}</div>`)
@@ -42,27 +64,64 @@ function page({ title, description, url, route }) {
     .replace(/(<meta (?:name|property)="(?:description|og:description|twitter:description)" content=")[^"]*/g, `$1${esc(description)}`)
     .replace(/(<meta (?:name|property)="(?:og:title|twitter:title)" content=")[^"]*/g, `$1${esc(title)}`)
     .replace(/(<link rel="canonical" href=")[^"]*/, `$1${url}`)
-    .replace(/(<meta property="og:url" content=")[^"]*/, `$1${url}`);
+    .replace(/(<meta property="og:url" content=")[^"]*/, `$1${url}`)
+    .replace("</head>", () => `    ${FADE_GUARD}
+    ${jsonLd(ld)}
+  </head>`);
 }
 
-// Project slugs and copy come straight from the data file.
-const src = readFileSync(join(root, "src/data/projects.ts"), "utf8");
-const projects = [...src.matchAll(/slug: "([^"]+)",[\s\S]*?name: "([^"]+)",\s*category: "([^"]+)",[\s\S]*?summary: "([^"]+)",/g)].map(
-  ([, slug, name, category, summary]) => ({ slug, name, category, summary }),
-);
-if (projects.length === 0) throw new Error("No projects parsed from src/data/projects.ts");
+// Project slugs and copy come straight from the data file (via the SSR bundle).
+const projects = PROJECTS;
+if (projects.length === 0) throw new Error("No projects in src/data/projects.ts");
+const workUrl = (p) => `${siteUrl}work/${p.slug}/`;
 
 for (const p of projects) {
   const dir = join(out, "work", p.slug);
   mkdirSync(dir, { recursive: true });
   writeFileSync(
     join(dir, "index.html"),
-    page({ title: `${p.name} — ${p.category} | Jerquin Bayudo`, description: `${p.name}: ${p.summary}`, url: `${siteUrl}work/${p.slug}/`, route: `/work/${p.slug}` }),
+    page({
+      title: `${p.name} — ${p.category} | Jerquin Bayudo`,
+      description: `${p.name}: ${p.summary}`,
+      url: workUrl(p),
+      route: `/work/${p.slug}`,
+      // The case study page, and the product it describes (built by the Person in the shell).
+      ld: {
+        "@graph": [
+          { "@type": "WebPage", "@id": workUrl(p), url: workUrl(p), name: `${p.name} — ${p.category}`, description: p.summary, about: { "@id": `${workUrl(p)}#product` }, author: PERSON, isPartOf: { "@id": siteUrl } },
+          {
+            "@type": "WebApplication",
+            "@id": `${workUrl(p)}#product`,
+            name: p.name,
+            description: p.summary,
+            applicationCategory: p.category,
+            operatingSystem: "Web",
+            ...(p.links[0] && { url: p.links[0].href }),
+            ...(p.stack.length > 0 && { keywords: p.stack.join(", ") }),
+            creator: PERSON,
+          },
+        ],
+      },
+    }),
   );
 }
 
 // Home page: same tags as the shell, plus its pre-rendered content.
-writeFileSync(join(out, "index.html"), shell.replace('<div id="root"></div>', () => `<div id="root">${render("/")}</div>`));
+const homeLd = {
+  "@type": "ProfilePage",
+  "@id": siteUrl,
+  url: siteUrl,
+  mainEntity: PERSON,
+  hasPart: projects.map((p) => ({ "@type": "WebPage", "@id": workUrl(p), url: workUrl(p), name: p.name })),
+};
+writeFileSync(
+  join(out, "index.html"),
+  shell.replace('<div id="root"></div>', () => `<div id="root">${visible(render("/"))}</div>`).replace("</head>", () => `    ${FADE_GUARD}
+    ${jsonLd(homeLd)}
+  </head>`),
+);
+// kapaldo.com's sitemap (ayts app/sitemap.ts) imports this, so new projects get listed automatically.
+writeFileSync(join(out, "pages.json"), JSON.stringify({ work: projects.map((p) => p.slug) }, null, 2) + "\n");
 rmSync(ssrOut, { recursive: true, force: true });
 
 if (!existsSync(dirname(target))) throw new Error(`Target parent not found: ${dirname(target)}`);

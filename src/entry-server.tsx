@@ -11,6 +11,8 @@ import Index from "./pages/Index";
 import CaseStudy from "./pages/CaseStudy";
 import NotFound from "./pages/NotFound";
 
+export { PROJECTS } from "./data/projects";
+
 /** `route` is app-relative ("/", "/work/kapaldo"); the deploy base is added here. */
 export function render(route: string) {
   const base = import.meta.env.BASE_URL.replace(/\/$/, "");

@@ -1,1 +1,5 @@
-/*    /index.html   200
+# This standalone copy moved to kapaldo.com/developer. Permanent redirects keep
+# search engines and AI answers pointing at one address.
+/work/:slug    https://kapaldo.com/developer/work/:slug/   301
+/work/:slug/   https://kapaldo.com/developer/work/:slug/   301
+/*            https://kapaldo.com/developer/                301
