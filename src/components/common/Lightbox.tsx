@@ -194,6 +194,9 @@ function LightboxViewer({ images, index, onClose, onIndexChange }: Props) {
   const iconBtn =
     "grid h-10 w-10 place-items-center rounded-full bg-white/10 text-white transition-colors hover:bg-white/20 disabled:opacity-30 disabled:hover:bg-white/10";
 
+  // No document during the static pre-render; the lightbox starts closed anyway.
+  if (typeof document === "undefined") return null;
+
   return createPortal(
     <AnimatePresence>
       {open && current && (

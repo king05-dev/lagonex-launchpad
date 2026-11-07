@@ -27,3 +27,4 @@ dist-ssr
 .playwright-mcp/
 
 dist-kapaldo/
+dist-kapaldo-ssr/
